@@ -90,8 +90,8 @@
             }
 
             section.categories ul li{
+                flex:1;
                 display:flex;
-                height:80px;
                 margin:2px;
                 background-color: #3A3A3A;
                 font-size:22px;
@@ -102,6 +102,17 @@
                 justify-content:center;
                 text-shadow: 0 0 10px black;
             }
+
+            section.categories ul li a{
+                background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6));
+                flex:1;
+                padding: 40px 0;
+                color: white;
+                text-align: center;
+                text-decoration: none;
+                font-weight:bold;
+            }
+
             section.categories ul li.cat-1{
                 background: url(https://media.gazetadopovo.com.br/bomgourmet/2019/09/pastel-de-camarao-10-pasteis-c5f12cc0.jpg) center;
                 background-size: cover;
@@ -120,21 +131,28 @@
             section.categories ul li.cat-4{
                 background: url(https://www.vozdobico.com.br/wp-content/uploads/2019/10/refrigerantes.jpg) center;
                 background-size: cover;
+                
             }
 
 
             header{
+                background: url(https://media.gazetadopovo.com.br/bomgourmet/2019/09/pastel-de-camarao-10-pasteis-c5f12cc0.jpg) center;
+                background-size: cover;
+            }
+            .div-header{
+                background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.5));
                 display:flex;
                 flex-direction: column;
                 color: white;
                 height:200px;
-                background: url(https://media.gazetadopovo.com.br/bomgourmet/2019/09/pastel-de-camarao-10-pasteis-c5f12cc0.jpg) center;
-                background-size: cover;
                 padding: 15px;
                 align-items:center;
                 justify-content:center;
                 text-shadow: 2px 2px 5px black;
             }
+            .section-container{
+                    margin-bottom:80px;
+                }
 
             @media screen and (min-width: 480px) {
                 nav ul {
@@ -147,6 +165,18 @@
                     margin:0 10px;
                     font-size: 22px;
                 }
+                section.categories ul{
+                    display:flex;
+                    flex-direction: row;
+                    list-style-type: none;
+                    margin: 0;
+                    padding: 0;
+                }
+                section.categories ul li a:hover{
+                    background-image: linear-gradient(to bottom, rgba(100,0,0,0), rgba(0,0,0,0.5));
+                    color: #fff;
+                    text-shadow: 1px 1px 1px #000;
+                }
                 footer{
                     display:block !important;
                     text-align: center;
@@ -154,7 +184,7 @@
                     background-color: #3A3A3A;
                     color: white;
                 }
-                header{
+                .section-container{
                     margin-top:45px !important;
                 }
             }
@@ -175,7 +205,6 @@
             <nav>
                 <ul>
                     <li>
-                        
                         <a class="active" href="/cardapio">
                             <i class="fas fa-utensils"></i>
                             Cardapio
@@ -195,23 +224,36 @@
                     </li>
                 </ul>
             </nav>
-            <header class="section-header">
-                <img src="https://logo.criativoon.com/wp-content/uploads/2016/07/logotipo-lanchonete.png" alt="Stickman"  height="125">
-                <h3>Faça seu pedido que eviamos até você!</h3>
-            </header>
-
-            <section class="tittles">
-                <h1>Cardápio Digital</h1>
-                <p>Escolha uma categotia</p>
-            </section>
-            <section class="categories">
-                <ul>
-                    <li class="cat-1">Categoria 1</li>
-                    <li class="cat-2">Categoria 2</li>
-                    <li class="cat-3">Categoria 3</li>
-                    <li class="cat-4">Categoria 4</li>
-                </ul>
-            </section>
+            <div class="section-container">
+                <header class="section-header">
+                    <div  class="div-header">
+                        <img src="https://logo.criativoon.com/wp-content/uploads/2016/07/logotipo-lanchonete.png" alt="Stickman"  height="125">
+                        <h3>Faça seu pedido que eviamos até você!</h3>
+                    </div>
+                    
+                </header>
+                <section class="tittles">
+                    <h1>Cardápio Digital</h1>
+                    <p>Escolha uma categotia</p>
+                </section>
+                <section class="categories">
+                    <ul>
+                        <li class="cat-1">
+                            <a href="#">Categoria 1</a>
+                        </li>
+                        <li class="cat-2">
+                            <a href="#">Categoria 2</a>
+                        </li>
+                        <li class="cat-3">
+                            <a href="#">Categoria 3 </a>
+                        </li>
+                        <li class="cat-4">
+                            <a href="#">Categoria 4</a>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+            
             <footer>
                 <p>Footer</p>
             </footer>
