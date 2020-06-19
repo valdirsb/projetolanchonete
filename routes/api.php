@@ -23,19 +23,19 @@ Route::get('/ping', function (Request $request) {
 });
 
 //Rotas de Produtos
-Route::get('/products','ProductController@all');
-Route::get('/products/category/{id}','ProductController@filterCategory');
-Route::get('/product/{id}','ProductController@one');
-Route::post('/product','ProductController@new');
-Route::put('/product/{id}','ProductController@edit');
-Route::delete('/product/{id}','ProductController@delete');
+Route::get('/products','Api\ProductController@all');
+Route::get('/products/category/{id}','Api\ProductController@filterCategory');
+Route::get('/product/{id}','Api\ProductController@one');
+Route::post('/product','Api\ProductController@new');
+Route::put('/product/{id}','Api\ProductController@edit');
+Route::delete('/product/{id}','Api\ProductController@delete');
 
 //Rotas de Categorias
-Route::get('/category','CategoryController@all');
-Route::get('/category/{id}','CategoryController@one');
-Route::post('/category','CategoryController@new');
-Route::put('/category/{id}','CategoryController@edit');
-Route::delete('/category/{id}','CategoryController@delete');
+Route::get('/category','Api\CategoryController@all');
+Route::get('/category/{id}','Api\CategoryController@one');
+Route::post('/category','Api\CategoryController@new');
+Route::put('/category/{id}','Api\CategoryController@edit');
+Route::delete('/category/{id}','Api\CategoryController@delete');
 
 //Rotas de Upload de imagens
 

@@ -15,7 +15,7 @@
     </section>
     <section class="categories">
         <ul>
-        @foreach($categories as $category)
+        @foreach($front_categories as $category)
             <li class="cat-1" style="background: url({{$category->url}}) center;background-size: cover;">
                 <a href="#">{{$category->categoria}}</a>
             </li>
