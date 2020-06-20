@@ -23,7 +23,7 @@ Route::get('/ping', function (Request $request) {
 });
 
 //Rotas de Produtos
-Route::get('/products','Api\ProductController@all');
+Route::get('/products','Api\ProductController@all')->name('productapi');
 Route::get('/products/category/{id}','Api\ProductController@filterCategory');
 Route::get('/product/{id}','Api\ProductController@one');
 Route::post('/product','Api\ProductController@new');

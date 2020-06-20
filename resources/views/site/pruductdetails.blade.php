@@ -1,6 +1,6 @@
 @extends('layouts.site')
 
-@section('title', 'Cardápio Digiral')
+@section('title', $product->produto)
 
 @section('content')
 <div class="section-container">
@@ -13,16 +13,9 @@
     </header>
     <section class="tittles">
         <h1>Cardápio Digital</h1>
-        <p>Escolha uma categotia</p>
     </section>
     <section class="categories">
-        <ul>
-        @foreach($front_categories as $category)
-            <li class="cat-1" style="background: url({{$category->url}}) center;background-size: cover;">
-                <a href="{{route('filterCategory',$category->id)}}">{{$category->categoria}}</a>
-            </li>
-        @endforeach
-        </ul>
+        {{$product->produto}}
     </section>
 </div>
 @endsection

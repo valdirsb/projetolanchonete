@@ -1,13 +1,25 @@
 @extends('layouts.site')
 
-@section('title', 'Cardápio Digiral')
+@section('title')
+    @if($category)
+            Cardápio Digital - {{$category->categoria}}
+        @else
+            Cardápio Digital -Todas as Categorias
+    @endif
+@endsection
 
 @section('content')
 <div class="section-container">
     <header class="section-header">
         <div  class="div-header">
             <img src="https://logo.criativoon.com/wp-content/uploads/2016/07/logotipo-lanchonete.png" alt="Stickman"  height="125">
-            <h3>Faça seu pedido que eviamos até você!</h3>
+            <h3>
+            @if($category)
+                {{$category->categoria}}
+            @else
+                Todas as Categorias
+            @endif
+            </h3>
         </div>
         
     </header>
@@ -17,9 +29,9 @@
     </section>
     <section class="categories">
         <ul>
-        @foreach($front_categories as $category)
-            <li class="cat-1" style="background: url({{$category->url}}) center;background-size: cover;">
-                <a href="{{route('filterCategory',$category->id)}}">{{$category->categoria}}</a>
+        @foreach($products as $product)
+            <li>
+                <a href="{{route('productdetails',$product->id)}}">{{$product->produto}}</a>
             </li>
         @endforeach
         </ul>

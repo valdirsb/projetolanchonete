@@ -19,11 +19,24 @@ Route::get('/', function () {
 });
 */
 
+//PAGINA INICIAL
+
 Route::get('/','Site\SiteController@index');
 
-Route::get('/teste', function () {
-    return view('teste');
+//LISTAR OS PRODUTOS
+
+Route::prefix('/products')->group(function(){
+    Route::get('/','Site\ProductController@index');
+    Route::get('/category/{id}','Site\ProductController@filterCategory')->name('filterCategory');
 });
+
+//DETALHES DO PRODUTO
+
+Route::get('/product/{id}','Site\ProductController@one')->name('productdetails');
+
+
+
+
 
 //Auth::routes();
 
