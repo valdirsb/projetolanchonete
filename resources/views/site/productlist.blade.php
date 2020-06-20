@@ -12,29 +12,37 @@
 <div class="section-container">
     <header class="section-header">
         <div  class="div-header">
-            <img src="https://logo.criativoon.com/wp-content/uploads/2016/07/logotipo-lanchonete.png" alt="Stickman"  height="125">
-            <h3>
-            @if($category)
-                {{$category->categoria}}
-            @else
-                Todas as Categorias
-            @endif
-            </h3>
+            <img src="http://192.168.0.106/media/images/logo.jpg" alt="Stickman"  height="125">
+            <h1>Cardápio Digital</h1>
         </div>
         
     </header>
-    <section class="tittles">
-        <h1>Cardápio Digital</h1>
-        <p>Escolha uma categotia</p>
+    <section class="title">
+        @if($category)
+            <h1>{{$category->categoria}}</h1>
+        @else
+            <h1>Todas as Categorias</h1>
+        @endif
     </section>
-    <section class="categories">
-        <ul>
+    <section class="productlist">
         @foreach($products as $product)
-            <li>
-                <a href="{{route('productdetails',$product->id)}}">{{$product->produto}}</a>
-            </li>
+            <a href="{{route('productdetails',$product->id)}}">
+                <div class="card">
+                    <div>
+                        <h3>{{$product->produto}}</h3>
+                        <p>{{$product->descricao}}</p>
+                        <h4>R$ {{$product->valor}}</h4>
+                    </div>
+                    @if($product->imagem)
+                        <img src="{{$product->imagem}}" alt="Stickman"  width="100" height="100">
+                    @endif
+                </div> 
+            </a>
         @endforeach
-        </ul>
+    
+        
     </section>
+    
+
 </div>
 @endsection

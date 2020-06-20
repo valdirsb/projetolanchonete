@@ -6,12 +6,12 @@
 <div class="section-container">
     <header class="section-header">
         <div  class="div-header">
-            <img src="https://logo.criativoon.com/wp-content/uploads/2016/07/logotipo-lanchonete.png" alt="Stickman"  height="125">
+            <img src="http://192.168.0.106/media/images/logo.jpg" alt="Stickman"  height="125">
             <h3>Faça seu pedido que eviamos até você!</h3>
         </div>
         
     </header>
-    <section class="tittles">
+    <section class="title">
         <h1>Cardápio Digital</h1>
         <p>Escolha uma categotia</p>
     </section>
