@@ -35,6 +35,12 @@ Route::prefix('/products')->group(function(){
 Route::get('/product/{id}','Site\ProductController@one')->name('productdetails');
 
 
+//CARRINHO
+
+Route::get('/cart','Site\CartController@index')->name('cart');
+
+Route::post('/cart','Site\CartController@add');
+
 
 
 

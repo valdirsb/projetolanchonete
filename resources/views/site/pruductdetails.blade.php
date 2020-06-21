@@ -3,6 +3,11 @@
 @section('title', $product->produto)
 
 @section('content')
+
+@component('components.barravoltar')
+VOLTAR
+@endcomponent
+
 <div class="section-container">
     
     <section class="title">
@@ -19,9 +24,14 @@
             <p>{{$product->descricao}}</p>
             
         </div>
-        <h4 class="preco">R$ {{$product->valor}}</h4>
+        <h4 class="preco">{{ 'R$ '.number_format($product->valor, 2, ',', '.')}}</h4>
     </div>
-    <form action="">
+    <form method="POST" action="/cart" class="addtocartform">
+        @csrf
+
+        {{-- Adicionais --}}
+
+        <!--
         <div class="card">
             <div>
                 <h4 class="h-red">Adicionais</h4>
@@ -49,19 +59,35 @@
                 
             </div>
         </div>
+        -->
+
         <div class="card">
             <div class="cardTextarea">
                 <h4 class="h-red">Alguma Observação?</h4>
-                <textarea name="message"></textarea>
+                <textarea name="obs"></textarea>
             </div>
         </div>
-        <div class="contador">
-            <div>-</div>
-            <div>1</div>
-            <div>+</div>
+        <div class="flex">
+            <div class="flex-1"><p>Quantidade:</p></div>
+            <div class="flex-1"><p>Valor Total:</p></div>
+        </div>
+        <div class="flex">
+            <div class="flex-1">
+                <div class="contador">
+                    <button data-action="decrease">-</button>
+                    <input type="text" name="qt" value="1" class="addtocart_qt" />
+                    <input type="hidden" name="vu" value="{{$product->valor}}" class="valor_unit"  />
+                    <input type="hidden" name="id" value="{{$product->id}}" class="valor_unit"  />
+                    <button data-action="increase">+</button>
+                </div>
+            </div>
+            <div class="flex-1">
+                <p class="valor">{{'R$ '.number_format($product->valor, 2, ',', '.')}}</p>
+            </div>
         </div>
         <div class="flex-center">
-            <a href="#" class="botao-carrinho"><i class="fas fa-shopping-cart"></i>ADICIONAR AO CARRINHO</a>
+            <a href="#" class="botao-carrinho" ><i class="fas fa-shopping-cart"></i>ADICIONAR AO CARRINHO</a>
+            <input type="submit" value="ok">
         </div>
         
 

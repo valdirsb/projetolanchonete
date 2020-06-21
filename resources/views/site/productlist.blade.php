@@ -9,6 +9,11 @@
 @endsection
 
 @section('content')
+
+@component('components.barravoltar')
+VOLTAR
+@endcomponent
+
 <div class="section-container">
     <header class="section-header">
         <div  class="div-header">

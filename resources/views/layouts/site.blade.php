@@ -19,19 +19,19 @@
             <nav>
                 <ul>
                     <li>
-                        <a class="active" href="/cardapio">
+                        <a class="active" href="/">
                             <i class="fas fa-utensils"></i>
                             Cardapio
                         </a>
                     </li>
                     <li>
-                        <a href="/cardapio">
+                        <a href="/cadastro">
                             <i class="fas fa-user"></i>
                             Cadastro
                         </a>
                     </li>
                     <li>
-                        <a href="/cardapio">
+                        <a href="/carrinho">
                             <i class="fas fa-shopping-cart"></i>
                             Carrinho
                         </a>
@@ -46,5 +46,8 @@
             </footer>
             
         </div>
+
+    <script type="text/javascript" src="{{asset('assets/js/jquery-3.5.1.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/js/script.js')}}"></script>
     </body>
 </html>
