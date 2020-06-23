@@ -1,5 +1,7 @@
 @extends('layouts.site')
 
+@section('cardapio', 'class=active')
+
 @section('title', $product->produto)
 
 @section('content')
@@ -26,7 +28,7 @@ VOLTAR
         </div>
         <h4 class="preco">{{ 'R$ '.number_format($product->valor, 2, ',', '.')}}</h4>
     </div>
-    <form method="POST" action="/cart" class="addtocartform">
+    <form id="form" method="POST" action="/cart" class="addtocartform">
         @csrf
 
         {{-- Adicionais --}}
@@ -86,8 +88,7 @@ VOLTAR
             </div>
         </div>
         <div class="flex-center">
-            <a href="#" class="botao-carrinho" ><i class="fas fa-shopping-cart"></i>ADICIONAR AO CARRINHO</a>
-            <input type="submit" value="ok">
+            <input type="submit" class="botao-carrinho" value="ADICIONAR AO CARRINHO">
         </div>
         
 

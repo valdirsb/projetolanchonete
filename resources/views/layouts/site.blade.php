@@ -19,19 +19,19 @@
             <nav>
                 <ul>
                     <li>
-                        <a class="active" href="/">
+                        <a @yield('cardapio') href="/">
                             <i class="fas fa-utensils"></i>
                             Cardapio
                         </a>
                     </li>
                     <li>
-                        <a href="/cadastro">
+                        <a @yield('cadastro') href="/cadastro">
                             <i class="fas fa-user"></i>
                             Cadastro
                         </a>
                     </li>
                     <li>
-                        <a href="/carrinho">
+                        <a @yield('carrinho') href="/cart">
                             <i class="fas fa-shopping-cart"></i>
                             Carrinho
                         </a>

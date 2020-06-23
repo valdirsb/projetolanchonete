@@ -8,6 +8,8 @@
     @endif
 @endsection
 
+@section('cardapio', 'class=active')
+
 @section('content')
 
 @component('components.barravoltar')

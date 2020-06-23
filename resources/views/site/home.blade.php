@@ -2,6 +2,8 @@
 
 @section('title', 'Cardápio Digiral')
 
+@section('cardapio', 'class=active')
+
 @section('content')
 <div class="section-container">
     <header class="section-header">

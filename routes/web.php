@@ -41,6 +41,8 @@ Route::get('/cart','Site\CartController@index')->name('cart');
 
 Route::post('/cart','Site\CartController@add');
 
+Route::get('/cart/del/{chave}','Site\CartController@del');
+
 
 
 
