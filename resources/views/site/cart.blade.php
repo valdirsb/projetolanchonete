@@ -35,7 +35,21 @@ VOLTAR
                     <td><a href="/cart/del/{{$kay}}"><i class="fas fa-times"></i></a></td>
                     <td>{{$item['qt']}}</td>
                     <td><strong>{{$item['produto']}}</strong></td>
-                    <td class="cart_price">{{'R$ '.number_format($item['valor'], 2, ',', '.')}}</td>
+                    <td class="cart_price">
+                        <div style="font-size: 12px; color: #d6211b">
+                            Preço unitário
+                        </div>
+                        <div style="font-size: 12px ; color:#888">
+                            {{'R$ '.number_format($item['valor'], 2, ',', '.')}}
+                        </div>
+                        <div style="font-size: 12px; color: #d6211b">
+                            Preço total
+                        </div>
+                        <div style="font-size: 18px">
+                            {{'R$ '.number_format($vitem, 2, ',', '.')}}
+                        </div>
+                        
+                    </td>
                 </tr>
                 <tr style="border-bottom: 1px solid #bbb">
                     <td colspan="4" class="cart_obs"><strong>OBS: </strong>{{$item['obs']}}</td>

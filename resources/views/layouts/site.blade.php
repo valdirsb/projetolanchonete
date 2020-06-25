@@ -25,7 +25,7 @@
                         </a>
                     </li>
                     <li>
-                        <a @yield('cadastro') href="/cadastro">
+                        <a @yield('cadastro') href="/user">
                             <i class="fas fa-user"></i>
                             Cadastro
                         </a>

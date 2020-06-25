@@ -38,10 +38,26 @@ class CategoryController extends Controller
     public function new(Request $request){
         $categoria = $request->input('categoria');
 
+        if($request->file) {
+            $request->validate([
+                'file' => 'required|image|mimes:jpeg,jpg,png'
+            ]);
+    
+            $ext = $request->file->extension();
+            $imageName = time().'.'.$ext;
+    
+            $request->file->move(public_path('media/images/categories'), $imageName);
+
+            $urlImage = asset('media/images/categories/'.$imageName);
+        } else {
+            $urlImage = NULL;
+        }
+
         if($categoria ) {
 
             $category = new Category();
             $category->categoria = $categoria;
+            $category->url = $urlImage;
             $category->save();
 
             $this->array['result'] = [

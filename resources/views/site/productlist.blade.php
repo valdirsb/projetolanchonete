@@ -17,7 +17,7 @@ VOLTAR
 @endcomponent
 
 <div class="section-container">
-    <header class="section-header">
+    <header style="background: url({{$category?$category->url:'https://media.gazetadopovo.com.br/bomgourmet/2019/09/pastel-de-camarao-10-pasteis-c5f12cc0.jpg'}}) center;background-size: cover;">
         <div  class="div-header">
             <img src="http://192.168.0.106/media/images/logo.jpg" alt="Stickman"  height="125">
             <h1>Cardápio Digital</h1>
@@ -41,7 +41,7 @@ VOLTAR
                         <h4>R$ {{$product->valor}}</h4>
                     </div>
                     @if($product->imagem)
-                        <img src="{{$product->imagem}}" alt="Stickman"  width="100" height="100">
+                        <img src="{{$product->imagem}}" class="img-cover" alt="imagem" >
                     @endif
                 </div> 
             </a>

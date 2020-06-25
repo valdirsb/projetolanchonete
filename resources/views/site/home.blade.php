@@ -15,7 +15,7 @@
     </header>
     <section class="title">
         <h1>Cardápio Digital</h1>
-        <p>Escolha uma categotia</p>
+        <p>Escolha uma categoria</p>
     </section>
     <section class="categories">
         <ul>
