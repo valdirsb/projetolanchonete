@@ -20,7 +20,7 @@ Route::get('/', function () {
 */
 
 //PAGINA INICIAL
-Route::get('/','Site\SiteController@index');
+Route::get('/','Site\SiteController@index')->name('home');
 
 //LISTAR OS PRODUTOS
 Route::prefix('/products')->group(function(){
@@ -39,6 +39,16 @@ Route::post('/cart','Site\CartController@add');
 Route::get('/cart/del/{chave}','Site\CartController@del');
 
 //CADASTRO
+Route::get('/user/login','Auth\LoginController@index')->name('login');
+Route::post('/user/login','Auth\LoginController@authenticate');
+
+Route::get('/user/register','Auth\RegisterController@index')->name('register');
+Route::post('/user/register','Auth\RegisterController@register');
+
+Route::get('/user/logout','Auth\LoginController@logout')->name('logout');
+
+
+
 Route::get('/user','Site\UserController@index');
 
 
