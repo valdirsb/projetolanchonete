@@ -76,7 +76,7 @@ VOLTAR
 </div>
 
 <div class="flex-center">
-    <a href="#" class="botao-carrinho" ><i class="fas fa-clipboard-check"></i>FECHAR PEDIDO</a>
+    <a href="/cart/pag" class="botao-carrinho" ><i class="fas fa-clipboard-check"></i>CONCLUIR PEDIDO</a>
 </div>
 
 </div>

@@ -63,6 +63,14 @@ VOLTAR
         </div>
     </div>
     <div class="row">
+      <div class="col-25">
+        <label for="subject">Endereço para entrega</label>
+      </div>
+      <div class="col-75">
+        <textarea id="subject" name="address" placeholder="Degite seu endereço..." style="height:150px"></textarea>
+      </div>
+    </div>
+    <div class="row">
       <input type="submit" value="Cadastrar">
     </div>
     </form>

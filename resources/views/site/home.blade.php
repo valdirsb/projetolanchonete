@@ -8,7 +8,7 @@
 <div class="section-container">
     <header class="section-header">
         <div  class="div-header">
-            <img src="http://valdirsb.ddns.net/media/images/logo.jpg" alt="Stickman"  height="125">
+            <img src="{{asset('media/images/logo.jpg')}}" alt="Stickman"  height="125">
             <h3>Faça seu pedido que eviamos até você!</h3>
         </div>
         

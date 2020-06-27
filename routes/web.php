@@ -32,24 +32,29 @@ Route::prefix('/products')->group(function(){
 Route::get('/product/{id}','Site\ProductController@one')->name('productdetails');
 
 //CARRINHO
-Route::get('/cart','Site\CartController@index')->name('cart');
-
-Route::post('/cart','Site\CartController@add');
-
-Route::get('/cart/del/{chave}','Site\CartController@del');
+Route::prefix('/cart')->group(function(){
+    Route::get('/','Site\CartController@index')->name('cart');
+    Route::post('/','Site\CartController@add');
+    Route::get('/del/{chave}','Site\CartController@del');
+    Route::get('/pag','Site\CartController@pag')->middleware('auth');
+});
 
 //CADASTRO
-Route::get('/user/login','Auth\LoginController@index')->name('login');
-Route::post('/user/login','Auth\LoginController@authenticate');
 
-Route::get('/user/register','Auth\RegisterController@index')->name('register');
-Route::post('/user/register','Auth\RegisterController@register');
+Route::prefix('/user')->group(function(){
+    Route::get('/','Site\UserController@index')->middleware('auth')->name('perfil');
+    Route::get('/options','Site\UserController@loginoptions')->name('options');
 
-Route::get('/user/logout','Auth\LoginController@logout')->name('logout');
+    Route::get('/login','Auth\LoginController@index')->name('login');
+    Route::post('/login','Auth\LoginController@authenticate');
 
+    Route::get('/register','Auth\RegisterController@index')->name('register');
+    Route::post('/register','Auth\RegisterController@register');
 
+    Route::get('/logout','Auth\LoginController@logout')->name('logout');
+    
+});
 
-Route::get('/user','Site\UserController@index');
 
 
 //Auth::routes();

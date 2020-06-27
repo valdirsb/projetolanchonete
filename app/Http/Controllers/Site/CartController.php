@@ -10,7 +10,6 @@ class CartController extends Controller {
     
     public function index(Request $request) {
         
-        $products = Product::all();
         $carts =  $request->session()->get('cart', []);
         $array =[];
 
@@ -58,6 +57,12 @@ class CartController extends Controller {
         $request->session()->forget('cart');
         $request->session()->put('cart', $carts);
         return redirect()->back();
+
+    }
+
+    public function pag(Request $request) {
+        
+        return view('site.pag');
 
     }
 }

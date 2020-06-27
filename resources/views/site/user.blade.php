@@ -1,6 +1,6 @@
 @extends('layouts.site')
 
-@section('title', 'Carrinho')
+@section('title', 'Perfil')
 
 @section('cadastro', 'class=active')
 
@@ -15,23 +15,47 @@ VOLTAR
 <header class="cart-header">
     <div  class="div-cart">
         <i class="fas fa-user"></i>
-        <h1>Cadastro</h1>
+        <h1>Perfil de Usuário</h1>
     </div>
 </header>
 
-<div class="container-form">
-    
-  <div class="flex-center">
-    <a href="/user/login" class="botao-carrinho" ><i class="fas fa-sign-in-alt"></i>Fazer login</a>
+<div class="card">
+  <div>
+      <h3>Usuário Logado:</h3>
+      <table>
+        <tr>
+          <td><strong>Nome: </strong></td>
+          <td>{{$user->name}}</td>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td>{{$user->email}}</td>
+        </tr>
+      </table>
   </div>
-  <div class="flex-center">
-    <a href="/user/register" class="botao-carrinho" ><i class="fas fa-user-plus"></i>Novo Cadastro</a>
-  </div>
-  <div class="flex-center">
-    <a href="#" class="botao-face" ><i class="fab fa-facebook" style="font-size: 32px"></i>Fazer Login com Facebook</a>
-  </div>
-
 </div>
+
+<div class="card">
+  <div>
+      <h3>Endereço para entrega:</h3>
+      <p class="address">
+        {{$user->address}}
+      </p>
+  </div>
+</div>
+
+<div class="flex-center">
+  <a href="/" class="botao-cont-2" ><i class="fas fa-cart-arrow-down"></i>Continuar Comprando</a>
+</div>
+
+<div class="flex-center">
+  <a href="/cart" class="botao-carrinho" ><i class="fas fa-clipboard-check"></i>CONCLUIR PEDIDO</a>
+</div>
+
+<div class="flex-center">
+  <a href="/user/logout" class="botao-logout" ><i class="fas fa-sign-out-alt"></i>Logout</a>
+</div>
+
 
 </div>
 

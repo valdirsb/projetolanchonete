@@ -48,7 +48,7 @@ class LoginController extends Controller
         $creds = $request->only(['email','password']);
 
         if(Auth::attempt($creds)) {
-            return redirect()->route('home');
+            return redirect()->route('perfil');
         }else {
             return redirect()->route('login')
             ->with('warning', 'E-mail e/ou senha invalidos.');
@@ -57,6 +57,6 @@ class LoginController extends Controller
 
     public function logout(){
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('options');
     }
 }

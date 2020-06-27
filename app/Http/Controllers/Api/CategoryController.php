@@ -25,6 +25,7 @@ class CategoryController extends Controller
 
     public function one($id){
         $category = Category::find($id);
+        $category->url = asset($category->url);
 
         if($category){
             $this->array['result'] = $category;
@@ -45,10 +46,11 @@ class CategoryController extends Controller
     
             $ext = $request->file->extension();
             $imageName = time().'.'.$ext;
+            $imageFolder = '/media/images/categories';
     
-            $request->file->move(public_path('media/images/categories'), $imageName);
+            $request->file->move(public_path($imageFolder), $imageName);
 
-            $urlImage = asset('media/images/categories/'.$imageName);
+            $urlImage = $imageFolder.'/'.$imageName;
         } else {
             $urlImage = NULL;
         }

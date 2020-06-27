@@ -38,6 +38,7 @@ class ProductController extends Controller
 
     public function one($id){
         $product = Product::find($id);
+        $product->imagem = asset($product->imagem);
 
         if($product){
             $this->array['result'] = $product;
@@ -62,10 +63,11 @@ class ProductController extends Controller
     
             $ext = $request->file->extension();
             $imageName = time().'.'.$ext;
+            $imageFolder = '/media/images';
     
-            $request->file->move(public_path('media/images'), $imageName);
-
-            $urlImage = asset('media/images/'.$imageName);
+            $request->file->move(public_path($imageFolder), $imageName);
+            
+            $urlImage =  $imageFolder.'/'.$imageName ;
         } else {
             $urlImage = NULL;
         }
