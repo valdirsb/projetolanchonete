@@ -16,7 +16,7 @@ VOLTAR
         @if($product->imagem)
             <img src="{{$product->imagem}}" alt="Stickman"  width="250" >
         @else  
-            <img src="http://192.168.0.106/media/images/logo.jpg" alt="Stickman"  height="125">
+            <img src="{{asset("/media/images/logo.jpg")}}" alt="Stickman"  height="125">
         @endif
         
     </section>

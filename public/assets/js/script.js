@@ -21,9 +21,10 @@ $(function(){
 
         $('.addtocart_qt').val(qt);
         $('.valor').text(texto);
-
         
     });
+
+    $('.money').mask('#.##0,00', {reverse: true});
 
 
 });

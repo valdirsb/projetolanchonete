@@ -37,6 +37,7 @@ Route::prefix('/cart')->group(function(){
     Route::post('/','Site\CartController@add');
     Route::get('/del/{chave}','Site\CartController@del');
     Route::get('/pag','Site\CartController@pag')->middleware('auth');
+    Route::post('/pag','Site\CartController@pagok')->middleware('auth');
 });
 
 //CADASTRO

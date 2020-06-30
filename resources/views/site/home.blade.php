@@ -1,6 +1,6 @@
 @extends('layouts.site')
 
-@section('title', 'Cardápio Digiral')
+@section('title', 'Cardápio Digital')
 
 @section('cardapio', 'class=active')
 
@@ -9,7 +9,7 @@
     <header class="section-header">
         <div  class="div-header">
             <img src="{{asset('media/images/logo.jpg')}}" alt="Stickman"  height="125">
-            <h3>Faça seu pedido que eviamos até você!</h3>
+            <h3>Faça seu pedido que enviamos até você!</h3>
         </div>
         
     </header>

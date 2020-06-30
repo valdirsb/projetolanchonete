@@ -3,7 +3,6 @@ html, body {
     color: #636b6f;
     font-family: 'Nunito', sans-serif;
     font-weight: 200;
-    height: 100vh;
     margin: 0;
 }
 
@@ -142,13 +141,7 @@ section.categories ul li a{
     text-align: center;
 }
 
-form .card {
-    font-size: 18px;
-}
 
-form .card div {
-    margin-right: 20px;
-}
 
 form .card  textarea {
     width: 100%;
@@ -201,6 +194,19 @@ form .card  textarea {
     font-size: 18px;
     font-weight: bold;
     border-radius: 30px;
+}
+
+.botao-whatsapp{
+    display: flex;
+    cursor: pointer;
+    border: none;
+    padding: 15px;
+    background-color: #079b45;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 30px;
+    align-items: center;
 }
 
 .botao-logout{

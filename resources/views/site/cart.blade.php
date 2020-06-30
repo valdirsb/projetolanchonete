@@ -21,15 +21,12 @@ VOLTAR
 
 <div class="card cart">
     <table>
-        @php
-            $vtotal = 0
-        @endphp
+        
         @if(isset($cartlist))
             @foreach ($cartlist as $kay=>$item)
 
             @php
                 $vitem = $item['qt']*$item['valor'];
-                $vtotal += $vitem;
             @endphp
                 <tr>
                     <td><a href="/cart/del/{{$kay}}"><i class="fas fa-times"></i></a></td>
@@ -68,16 +65,17 @@ VOLTAR
 
     
 </div>
-
 <div class="flex">
     <div class="flex-1">
         <p class="cart-val-total">VALOR TOTAL: <span class="valor">{{'R$ '.number_format($vtotal, 2, ',', '.')}}</span></p>
     </div>
 </div>
 
-<div class="flex-center">
-    <a href="/cart/pag" class="botao-carrinho" ><i class="fas fa-clipboard-check"></i>CONCLUIR PEDIDO</a>
-</div>
+@if(isset($cartlist))
+    <div class="flex-center">
+        <a href="/cart/pag" class="botao-carrinho" ><i class="fas fa-clipboard-check"></i>CONCLUIR PEDIDO</a>
+    </div>
+@endif
 
 </div>
 

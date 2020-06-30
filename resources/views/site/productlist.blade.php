@@ -19,7 +19,7 @@ VOLTAR
 <div class="section-container">
     <header style="background: url({{$category?$category->url:'https://media.gazetadopovo.com.br/bomgourmet/2019/09/pastel-de-camarao-10-pasteis-c5f12cc0.jpg'}}) center;background-size: cover;">
         <div  class="div-header">
-            <img src="http://192.168.0.106/media/images/logo.jpg" alt="Stickman"  height="125">
+            <img src="{{asset("/media/images/logo.jpg")}}" alt="Stickman"  height="125">
             <h1>Cardápio Digital</h1>
         </div>
         

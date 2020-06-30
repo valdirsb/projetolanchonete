@@ -13,21 +13,22 @@ VOLTAR
 <div class="section-container container-form">
     <header class="cart-pag-header">
         <h1>Pagamento</h1>
-        <h2>R$ 50,00</h2>
+        <h2>{{'R$ '.number_format($vtotal, 2, ',', '.')}}</h2>
     </header>
-    
+<form method="POST">
+    @csrf
     <div class="card">
         <div>
             <h3>Como deseja pagar?</h3>
             <hr>
-            <form>
-                <input type="checkbox" name="cartão" value="Car">
+            <div>
+                <input type="checkbox" name="cartao" value="Traga a maquininha de cartão">
                 <label for="cartão"> Trazer a maquininha de cartão</label>
                 <hr>
-                <input type="checkbox" name="dinheiro" value="Bike">
+                <input type="checkbox" name="dinheiro" value="vou pagar em dinheiro">
                 <label for="dinheiro"> Vou pagar em Dinheiro</label><br>
-                <input type="number" name="troco" placeholder="Troco para">
-            </form>
+                <input type="text" inputmode="numeric" class="money" id="money" name="troco" placeholder="Troco para" >
+            </div>
         </div>
     </div>
 
@@ -35,15 +36,16 @@ VOLTAR
         <div>
             <h3>Observações Gerais:</h3>
             <hr>
-            <form>
+            <div>
                 <textarea id="subject" name="obs" placeholder="Alguma Observação?" style="height:80px"></textarea>
                 
-              </form>
+            </div>
         </div>
     </div>
     <div class="flex-center">
-        <a href="#" class="botao-carrinho" ><i class="fas fa-clipboard-check"></i>CONCLUIR PEDIDO</a>
+        <input type="submit" value="Concluir Pedido via WhatsApp" >
     </div>
+</form>
 
 </div>
 

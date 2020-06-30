@@ -19,7 +19,7 @@ VOLTAR
     </div>
 </header>
 
-<div class="container-form">
+<div>
     
   <div class="flex-center">
     <a href="/user/login" class="botao-carrinho" ><i class="fas fa-sign-in-alt"></i>Fazer login</a>
