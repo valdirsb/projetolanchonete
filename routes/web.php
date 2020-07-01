@@ -58,6 +58,15 @@ Route::prefix('/user')->group(function(){
 
 
 
+//ADMIN
+
+Route::prefix('/painel')->group(function(){
+    Route::get('/','Admin\HomeController@index')->name('painel');
+    Route::get('/login','Admin\Auth\LoginController@index')->name('painel-login');
+});
+
+
+
 //Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
