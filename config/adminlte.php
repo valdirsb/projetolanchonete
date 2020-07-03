@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Paniel</b>Lanchonete',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -192,7 +192,7 @@ return [
 
     'logout_url' => 'logout',
 
-    'login_url' => 'login',
+    'login_url' => 'painel/login',
 
     'register_url' => 'register',
 

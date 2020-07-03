@@ -37,7 +37,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest:admin')->except('logout');
     }
 
     public function index() {
@@ -47,7 +47,7 @@ class LoginController extends Controller
     public function authenticate(Request $request) {
         $creds = $request->only(['email','password']);
 
-        if(Auth::attempt($creds)) {
+        if(Auth::guard('admin')->attempt($creds)) {
             return redirect()->route('painel');
         }else {
             return redirect()->route('painel-login')
@@ -56,7 +56,12 @@ class LoginController extends Controller
     }
 
     public function logout(){
-        Auth::logout();
+        Auth::guard('admin')->logout();
         return redirect()->route('painel-login');
+    }
+
+    protected function guard()
+    {
+    return Auth::guard('admin');
     }
 }
