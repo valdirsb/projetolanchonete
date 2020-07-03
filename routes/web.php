@@ -65,10 +65,15 @@ Route::prefix('/painel')->group(function(){
 
     Route::get('/login','Admin\Auth\LoginController@index')->name('painel-login');
     Route::post('/login','Admin\Auth\LoginController@authenticate');
-    Route::get('/logout','Admin\Auth\LoginController@logout')->name('painel-logout');
+
+    Route::post('/logout','Admin\Auth\LoginController@logout')->name('painel-logout');
 
     Route::get('/register','Admin\Auth\RegisterController@index')->name('painel-register');
-    Route::post('/register','Admin\Auth\LoginController@register');
+    Route::post('/register','Admin\Auth\RegisterController@register');
+
+    Route::resource('cardapio', 'Admin\ProductController');
+
+
 });
 
 

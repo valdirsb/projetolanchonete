@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 //use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+
 
 class LoginController extends Controller
 {
@@ -47,11 +49,24 @@ class LoginController extends Controller
     public function authenticate(Request $request) {
         $creds = $request->only(['email','password']);
 
-        if(Auth::guard('admin')->attempt($creds)) {
+        $validator = $this->validator($creds);
+
+        $remember = $request->input('remember', false);
+
+        if($validator->fails()) {
+            return redirect()->route('painel-login')
+            ->withErrors($validator)
+            ->withInput();
+        }
+
+        if(Auth::guard('admin')->attempt($creds, $remember)) {
             return redirect()->route('painel');
         }else {
+            $validator->errors()->add('password', 'E-mail e/ou senha errados.');
+
             return redirect()->route('painel-login')
-            ->with('warning', 'E-mail e/ou senha invalidos.');
+            ->withErrors($validator)
+            ->withInput();
         }
     }
 
@@ -64,4 +79,13 @@ class LoginController extends Controller
     {
     return Auth::guard('admin');
     }
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'email' => ['required', 'string', 'email', 'max:200'],
+            'password' => ['required', 'string', 'min:4'],
+        ]);
+    }
+
 }

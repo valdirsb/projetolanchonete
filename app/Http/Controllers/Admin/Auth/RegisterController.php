@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 //use App\Providers\RouteServiceProvider;
-use App\User;
+use App\Admin;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -31,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/user';
+    protected $redirectTo = '/painel';
 
     /**
      * Create a new controller instance.
@@ -44,22 +44,22 @@ class RegisterController extends Controller
     }
 
     public function index() {
-        return view('site.register');
+        return view('admin.register');
     }
 
     public function register(Request $request) {
-        $data = $request->only(['name', 'email', 'password', 'password_confirmation', 'address']);
+        $data = $request->only(['name', 'email', 'password', 'password_confirmation']);
         $validator = $this->validator($data);
 
         if($validator->fails()) {
-            return redirect()->route('register')
+            return redirect()->route('painel-register')
             ->withErrors($validator)
             ->withInput();
         }
 
         $user = $this->create($data);
-        Auth::login($user);
-        return redirect()->route('perfil');
+        Auth::guard('admin')->login($user);
+        return redirect()->route('painel');
 
     }
 
@@ -75,7 +75,6 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:200', 'unique:users'],
             'password' => ['required', 'string', 'min:4', 'confirmed'],
-            'address' => ['required', 'string', 'max:300'],
         ]);
     }
 
@@ -87,11 +86,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        return Admin::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'address' => $data['address'],
         ]);
     }
 }
