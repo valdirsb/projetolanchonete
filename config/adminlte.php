@@ -250,12 +250,23 @@ return [
         ],
         [
             'text'        => 'Cardapio',
-            'url'         => 'painel/cardapio',
             'icon'        => 'fas fa-fw fa-utensils',
+            'submenu' => [
+                [
+                    'text' => 'Produtos',
+                    'icon_color' => 'cyan',
+                    'url'  => 'painel/cardapio/products',
+                ],
+                [
+                    'text' => 'Categorias',
+                    'icon_color' => 'cyan',
+                    'url'  => 'painel/cardapio/categories',
+                ],
+            ],
         ],
         [
             'text'        => 'Clientes',
-            'url'         => 'painel/clientes',
+            'url'         => 'painel/users/clients',
             'icon'        => 'fas fa-fw fa-user-friends',
         ],
 
@@ -269,7 +280,7 @@ return [
         ['header' => 'Admin'],
         [
             'text' => 'Usuarios',
-            'url'  => 'painel/admin',
+            'url'  => 'painel/users/admin',
             'icon' => 'fas fa-fw fa-users-cog',
         ],
         

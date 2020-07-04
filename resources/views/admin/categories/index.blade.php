@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Cardapio')
+@section('title', 'Categorias')
 
 @section('content_header')
-    <h1>Cardapio - Produtos</h1>
+    <h1>Cardapio - Categorias</h1>
 @endsection
 
 @section('content')

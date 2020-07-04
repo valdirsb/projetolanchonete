@@ -70,8 +70,17 @@ Route::prefix('/painel')->group(function(){
 
     Route::get('/register','Admin\Auth\RegisterController@index')->name('painel-register');
     Route::post('/register','Admin\Auth\RegisterController@register');
+    
+    //cardapio
+    Route::resource('cardapio/products', 'Admin\ProductController');
+    Route::resource('cardapio/categories', 'Admin\CategoryController');
 
-    Route::resource('cardapio', 'Admin\ProductController');
+    //Usuarios
+
+        //clientes
+        Route::resource('users/clients', 'Admin\UserController');
+        //Admins
+        Route::resource('users/admin', 'Admin\AdminController');
 
 
 });

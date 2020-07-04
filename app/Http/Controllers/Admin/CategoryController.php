@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class CategoryController extends Controller
 {
 
 
@@ -13,7 +13,7 @@ class ProductController extends Controller
     {
         $this->middleware('auth:admin');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +21,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('admin.products.index');
+        return view('admin.categories.index');
     }
 
     /**
