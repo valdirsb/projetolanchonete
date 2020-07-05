@@ -37,6 +37,13 @@
                         <label class="custom-file-label" for="customFile">Eescolha uma imagem</label>
                     </div>
                 </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <img src="" id="category-img-tag" style="" />
+                    </div>
+                </div>
                 
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label"></label>
@@ -51,3 +58,29 @@
     
 
 @endsection
+
+@section('js')
+<script>
+
+$(function(){
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#category-img-tag').attr('src', e.target.result);
+            }
+            $('#category-img-tag').attr('style',"width:200px; height:100px; object-fit:cover");
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#customFile").change(function(){
+        readURL(this);
+    });
+});
+</script>
+
+    
+@stop

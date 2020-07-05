@@ -25,7 +25,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $users = Admin::paginate(10);
+        $users = Admin::all();
         $loggedId = intval(Auth::guard('admin')->id());
 
         return view('admin.users.admins.index', [

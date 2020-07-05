@@ -108,7 +108,15 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+
+        if($category){
+            return view('admin.categories.edit',[
+                'category' => $category
+            ]);
+        }
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -120,7 +128,58 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::find($id);
+
+        if($category){
+
+            $data = $request->only([
+                'categoria',
+            ]);
+            $validator = Validator::make([
+                'categoria' => $data['categoria']
+            ], [
+                'categoria' => ['required', 'string', 'max:100'],
+            ]);
+
+            if($request->file) {
+                $request->validate([
+                    'file' => 'required|image|mimes:jpeg,jpg,png'
+                ]);
+        
+                $ext = $request->file->extension();
+                $imageName = time().'.'.$ext;
+                $imageFolder = '/media/images/categories';
+                //copiando a nova imagem
+                $request->file->move(public_path($imageFolder), $imageName);
+                //deletando a imagem atual
+                $urlImage = $imageFolder.'/'.$imageName;
+                $abspath=$_SERVER['DOCUMENT_ROOT'];
+                $finalpath = $abspath.'/'.$category->url;
+                if (File::exists($finalpath)) {
+                    File::delete($finalpath);
+                    //unlink($caminho);
+                }
+
+                $category->url = $urlImage;
+
+            } 
+
+            $category->categoria = $data['categoria'];
+
+
+            if(count( $validator->errors() ) > 0) {
+                return redirect()->route('categories.edit', [
+                    'category' => $id
+                ])->withErrors($validator);
+            }
+
+            $category->save();
+
+        }
+
+        return redirect()->route('categories.index');
+
+        
     }
 
     /**
