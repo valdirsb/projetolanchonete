@@ -75,6 +75,11 @@ Route::prefix('/painel')->group(function(){
     Route::resource('cardapio/products', 'Admin\ProductController');
     Route::resource('cardapio/categories', 'Admin\CategoryController');
 
+    //Perfil
+
+    Route::get('/profile','Admin\profileController@index')->name('painel-profile');
+    Route::PUT('/profilesave','Admin\profileController@save')->name('painel-profile.save');
+
     //Usuarios
 
         //clientes

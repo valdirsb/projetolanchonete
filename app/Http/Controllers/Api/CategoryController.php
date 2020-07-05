@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use App\Category;
 
 class CategoryController extends Controller
@@ -104,6 +105,16 @@ class CategoryController extends Controller
         $category = Category::find($id);
 
         if($category) {
+
+        $abspath=$_SERVER['DOCUMENT_ROOT'];
+
+        $finalpath = $abspath.'/'.$category->url;
+
+        if (File::exists($finalpath)) {
+            File::delete($finalpath);
+            //unlink($caminho);
+        }
+
             $category->delete();
         } else {
             $this->array['error'] = 'ID não existe';

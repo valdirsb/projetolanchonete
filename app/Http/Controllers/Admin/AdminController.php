@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Admin;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -14,6 +15,7 @@ class AdminController extends Controller
     public function __construct()
     {
         $this->middleware('auth:admin');
+        $this->middleware('can:edit-users');
     }
 
     /**
@@ -24,8 +26,11 @@ class AdminController extends Controller
     public function index()
     {
         $users = Admin::paginate(10);
+        $loggedId = intval(Auth::guard('admin')->id());
+
         return view('admin.users.admins.index', [
-            'users' => $users 
+            'users' => $users ,
+            'loggedId' => $loggedId
         ]);
     }
 
@@ -185,6 +190,13 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $loggedId = intval(Auth::guard('admin')->id());
+
+        if($loggedId !== intval($id)) {
+            $user = Admin::find($id);
+            $user->delete();
+        }
+
+        return redirect()->route('admin.index');
     }
 }

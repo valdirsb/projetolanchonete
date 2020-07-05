@@ -27,8 +27,14 @@
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
                     <td>
-                        <a href="{{ route('admin.edit', ['admin' => $user->id]) }}" class="btn btn-sm btn-info">Editar</a>
-                        <a href="{{ route('admin.destroy', ['admin' => $user->id]) }}" class="btn btn-sm btn-danger">Excluir</a>
+                        <a href="{{ route('admin.edit', ['admin' => $user->id]) }}" class="btn btn-sm btn-info"><i class="fas fa-pencil-alt"></i> Editar</a>
+                        @if($loggedId !== intval($user->id))
+                            <form method="POST" action="{{ route('admin.destroy', ['admin' => $user->id]) }}" class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir?')">
+                                @method('DELETE')
+                                @csrf
+                                <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Excluir</button>
+                            </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach

@@ -272,16 +272,23 @@ return [
 
         ['header' => 'account_settings'],
         [
-            'text' => 'profile',
-            'url'  => 'painel/settings',
+            'text' => 'Meu Perfil',
+            'url'  => 'painel/profile',
             'icon' => 'fas fa-fw fa-user',
         ],
 
-        ['header' => 'Admin'],
+        ['header' => 'Configurações', 'can'  => 'edit-users'],
         [
             'text' => 'Usuarios',
             'url'  => 'painel/users/admin',
             'icon' => 'fas fa-fw fa-users-cog',
+            'can'  => 'edit-users'
+        ],
+        [
+            'text' => 'Configurações do Site',
+            'url'  => 'painel/config',
+            'icon' => 'fas fa-fw fa-cog',
+            'can'  => 'edit-users'
         ],
         
     ],
