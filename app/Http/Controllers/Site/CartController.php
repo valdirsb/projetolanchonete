@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Product;
+use App\Order;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller {
@@ -66,6 +67,8 @@ class CartController extends Controller {
         $array = $this->cart($data);
 
         $retorno = $this->cartenviar($user,$cartao,$dinheiro,$troco,$obs,$array);
+
+        $retorno2 = $this->ordersave($user,$cartao,$dinheiro,$troco,$obs,$array);
         
         //$request->session()->forget('cart');
 
@@ -153,6 +156,54 @@ $textoconvertido = rawurlencode ($texto);
 
 
         return $array;
+
+    }
+
+    protected function ordersave($user,$cartao,$dinheiro,$troco,$obs,$array){
+
+        $user_id = $user->id;
+        $address_id = 1;
+
+        if($cartao){
+            $cartao = 1;
+        }
+
+        if($dinheiro){
+            $dinheiro = 1;
+        }
+
+
+        $newpedido = new Order();
+            $newpedido->user_id = $user_id;
+            $newpedido->address_id = $address_id;
+            if($cartao){
+                $newpedido->cartao = 1;
+            }
+            if($dinheiro){
+                $newpedido->dinheiro = 1;
+            }
+            $newpedido->troco = floatval($troco);
+            $newpedido->valor = 0;
+            $newpedido->save();
+
+        foreach($array['cartlist'] as $produto){
+            $product = Product::find($produto['id']);
+
+            $vtotal = $produto['qt']*$product->valor;
+
+            $newpedido->products()->save($product, [
+            'quantidade' => $produto['qt'],
+            'valor_unitario' => $product->valor,
+            'valor_total' => $vtotal,
+            'obs' => $produto['obs']
+            ]);
+
+            $newpedido->valor += $vtotal;
+        }
+
+        $newpedido->save();
+
+        return $newpedido;
 
     }
 

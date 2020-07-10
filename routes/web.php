@@ -87,6 +87,14 @@ Route::prefix('/painel')->group(function(){
         //Admins
         Route::resource('users/admin', 'Admin\AdminController');
 
+    //Pedidos
+
+        //teste
+        Route::get('/teste','Admin\orderController@teste');
+        Route::get('/orders','Admin\orderController@index')->name('painel-order');
+        Route::get('/orders/entregues','Admin\orderController@entregues');
+        Route::get('/orders/cancelados','Admin\orderController@cancelados');
+        Route::PUT('/orders/{id}','Admin\orderController@savestatus')->name('painel-order-status');
 
 });
 

@@ -243,10 +243,26 @@ return [
         ],
         [
             'text'        => 'Pedidos',
-            'url'         => 'painel/pedidos',
             'icon'        => 'fas fa-fw fa-clipboard-check',
             'label'       => 4,
             'label_color' => 'success',
+            'submenu' => [
+                [
+                    'text' => 'Novos Pedidos',
+                    'icon_color' => 'cyan',
+                    'url'  => 'painel/orders',
+                ],
+                [
+                    'text' => 'Pedidos Finalizados',
+                    'icon_color' => 'green',
+                    'url'  => 'painel/orders/entregues',
+                ],
+                [
+                    'text' => 'Pedidos Cancelados',
+                    'icon_color' => 'red',
+                    'url'  => 'painel/orders/cancelados',
+                ],
+            ],
         ],
         [
             'text'        => 'Cardapio',
