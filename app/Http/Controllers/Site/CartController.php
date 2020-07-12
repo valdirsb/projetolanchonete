@@ -182,6 +182,7 @@ $textoconvertido = rawurlencode ($texto);
             if($dinheiro){
                 $newpedido->dinheiro = 1;
             }
+            $newpedido->obs = $obs;
             $newpedido->troco = floatval($troco);
             $newpedido->valor = 0;
             $newpedido->save();
