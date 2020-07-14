@@ -77,8 +77,8 @@ Route::prefix('/painel')->group(function(){
 
     //Perfil
 
-    Route::get('/profile','Admin\profileController@index')->name('painel-profile');
-    Route::PUT('/profilesave','Admin\profileController@save')->name('painel-profile.save');
+    Route::get('/profile','Admin\ProfileController@index')->name('painel-profile');
+    Route::PUT('/profilesave','Admin\ProfileController@save')->name('painel-profile.save');
 
     //Usuarios
 
@@ -90,11 +90,11 @@ Route::prefix('/painel')->group(function(){
     //Pedidos
 
         //teste
-        Route::get('/teste','Admin\orderController@teste');
-        Route::get('/orders','Admin\orderController@index')->name('painel-order');
-        Route::get('/orders/entregues','Admin\orderController@entregues');
-        Route::get('/orders/cancelados','Admin\orderController@cancelados');
-        Route::PUT('/orders/{id}','Admin\orderController@savestatus')->name('painel-order-status');
+        Route::get('/teste','Admin\OrderController@teste');
+        Route::get('/orders','Admin\OrderController@index')->name('painel-order');
+        Route::get('/orders/entregues','Admin\OrderController@entregues');
+        Route::get('/orders/cancelados','Admin\OrderController@cancelados');
+        Route::PUT('/orders/{id}','Admin\OrderController@savestatus')->name('painel-order-status');
 
 });
 
