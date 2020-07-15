@@ -56,6 +56,10 @@ Route::prefix('/user')->group(function(){
     
 });
 
+//PEDIDOS
+
+Route::get('/order','Site\OrderController@index');
+
 
 
 //ADMIN

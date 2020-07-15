@@ -66,16 +66,15 @@ class CartController extends Controller {
         $data = $request->session()->get('cart', []);
         $array = $this->cart($data);
 
-        $retorno = $this->cartenviar($user,$cartao,$dinheiro,$troco,$obs,$array);
+        //$retorno = $this->cartenviar($user,$cartao,$dinheiro,$troco,$obs,$array);
+        //return view('site.pagok',$retorno );
 
         $retorno2 = $this->ordersave($user,$cartao,$dinheiro,$troco,$obs,$array);
         
-        //$request->session()->forget('cart');
-
-        return view('site.pagok',$retorno );
-
+        $request->session()->forget('cart');
+        
         //return redirect($retorno['link']);
-        //return redirect()->route('home');
+        return redirect()->route('home');
 
     }
 

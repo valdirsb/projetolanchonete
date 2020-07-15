@@ -392,6 +392,7 @@ th, td {
     padding: 15px;
     align-items:center;
     justify-content:center;
+    text-align: center;
     text-shadow: 2px 2px 5px black;
 }
 .section-container{
