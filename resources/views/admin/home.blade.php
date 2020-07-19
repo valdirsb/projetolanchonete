@@ -58,7 +58,7 @@
     <div class="col-md-6">
         <div class="cart">
             <div class="card-header">
-                <h3>Produtos mais vendidos</h3>
+                <h3>Produtos mais vendidos -</h3>
 
             </div>
         </div>
