@@ -12,8 +12,14 @@ class OrderController extends Controller
 
         $user = Auth::user();
 
+        $orderProd = $user->orders->whereIn('status_id', [1, 2, 3]);
+        $orderCancel = $user->orders->where('status_id', 5);
+        $orderFinish = $user->orders->where('status_id', 4);
+
         return view('site.order', [
-            'orders' => $user->orders
+            'orders' => $orderProd,
+            'ordercancel' => $orderCancel,
+            'orderfinish' => $orderFinish
         ]);
     }
 }

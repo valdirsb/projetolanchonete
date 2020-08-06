@@ -48,6 +48,82 @@ VOLTAR
         
     </section>
 
+    @if (count($orderfinish) > 0)
+        
+    <section>
+        <h3 style="text-align: center; color:red">Pedidos Entregues</h3> 
+        <div class="card cart">
+            <div>
+                <table>
+                    <tr>
+                        <th><h3>Nº</h3></th>
+                        <th style="text-align: center"><h3>Status</h3></th>
+                        <th style="text-align: center"><h3>Valor</h3></th>
+                    </tr> 
+                </table>
+            </div>
+        </div> 
+        @foreach ($orderfinish as $order)
+            <a href="#">
+                <div class="card">
+                    <div>
+                        <table>
+                            <tr>
+                                <td>{{$order->id}}</td>
+                                <td style="width: 200px ; text-align:center">{{$order->status->nome}}</td>
+                                <td>R$ {{$order->valor}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div> 
+            </a>
+        @endforeach
+    
+        
+    </section>
+
+
+    @endif
+
+    @if (count($ordercancel) > 0)
+        
+    <section>
+        <h3 style="text-align: center; color:red">Pedidos Cancelados</h3> 
+        <div class="card cart">
+            <div>
+                <table>
+                    <tr>
+                        <th><h3>Nº</h3></th>
+                        <th style="text-align: center"><h3>Status</h3></th>
+                        <th style="text-align: center"><h3>Valor</h3></th>
+                    </tr> 
+                </table>
+            </div>
+        </div> 
+        @foreach ($ordercancel as $order)
+            <a href="#">
+                <div class="card">
+                    <div>
+                        <table>
+                            <tr>
+                                <td>{{$order->id}}</td>
+                                <td style="width: 200px ; text-align:center">{{$order->status->nome}}</td>
+                                <td>R$ {{$order->valor}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div> 
+            </a>
+        @endforeach
+    
+        
+    </section>
+
+
+    @endif
+
+    
+
 </div>
 
 
