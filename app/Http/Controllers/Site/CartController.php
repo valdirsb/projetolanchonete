@@ -74,7 +74,8 @@ class CartController extends Controller {
         $request->session()->forget('cart');
         
         //return redirect($retorno['link']);
-        return redirect()->route('home');
+        //return redirect()->route('home');
+        return view('site.ordercomp');
 
     }
 

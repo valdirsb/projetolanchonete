@@ -43,7 +43,7 @@ VOLTAR
         </div>
     </div>
     <div class="flex-center">
-        <input type="submit" value="Concluir Pedido via WhatsApp" >
+        <input type="submit" value="Finalizar Compra" >
     </div>
 </form>
 

@@ -40,7 +40,15 @@ VOLTAR
     </div>
     <div class="row">
       <div class="col-25">
-        <label for="email">Digite seu email:</label>
+        <label for="email">Digite seu Telefone:</label>
+      </div>
+      <div class="col-75">
+        <input type="text" name="phone"class="phone" id="phone" value="{{old('phone')}}" >
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="email">Digite seu email:</label>(opcional)
       </div>
       <div class="col-75">
         <input type="email" name="email" value="{{old('email')}}" >

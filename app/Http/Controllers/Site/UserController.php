@@ -11,8 +11,13 @@ class UserController extends Controller
     public function index() {
 
         $user = Auth::user();
+
+        $order = $user->orders->whereIn('status_id', [1, 2, 3])->count();
         
-        return view('site.user', ['user' => $user]);
+        return view('site.user', [
+            'user' => $user,
+            'order' =>  $order
+            ]);
         
     }
 

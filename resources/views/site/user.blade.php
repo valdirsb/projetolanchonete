@@ -44,6 +44,13 @@ VOLTAR
   </div>
 </div>
 
+@if ($order)
+    <div class="flex-center">
+      <a href="/order" class="botao-cont-2" ><i class="fas fa-clipboard-check"></i>ver meus pedidos</a>
+    </div>
+@endif
+
+
 <div class="flex-center">
   <a href="/" class="botao-cont-2" ><i class="fas fa-cart-arrow-down"></i>Continuar Comprando</a>
 </div>
