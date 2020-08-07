@@ -23,6 +23,7 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
+    //Teste
 
     use RegistersUsers;
 
