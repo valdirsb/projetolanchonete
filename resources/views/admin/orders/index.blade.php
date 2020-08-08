@@ -70,6 +70,9 @@
                                             <p><strong>Nome do Cliente:</strong>  {{$pedido->user->name}}</p>
                                         </div>
                                         <div class="row">
+                                            <p><strong>Telefone:</strong>  {{$pedido->user->phone}}</p>
+                                        </div>
+                                        <div class="row">
                                             <strong>Itens:</strong>
                                         </div>
                                         <table style="width:100%">

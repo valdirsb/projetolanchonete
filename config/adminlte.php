@@ -188,7 +188,7 @@ return [
 
     'use_route_url' => false,
 
-    'dashboard_url' => '/',
+    'dashboard_url' => 'painel/',
 
     'logout_url' => 'painel/logout',
 
@@ -239,7 +239,7 @@ return [
         [
             'text'        => 'Pedidos',
             'icon'        => 'fas fa-fw fa-clipboard-check',
-            'label'       => 4,
+            /* 'label'       => 4, */
             'label_color' => 'success',
             'submenu' => [
                 [
