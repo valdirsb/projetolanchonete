@@ -23,6 +23,7 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
+    //Teste
 
     use RegistersUsers;
 
@@ -48,7 +49,7 @@ class RegisterController extends Controller
     }
 
     public function register(Request $request) {
-        $data = $request->only(['name', 'email', 'password', 'password_confirmation', 'address']);
+        $data = $request->only(['name', 'email', 'password', 'password_confirmation', 'address', 'phone']);
         $validator = $this->validator($data);
 
         if($validator->fails()) {
@@ -73,9 +74,10 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:100'],
-            'email' => ['required', 'string', 'email', 'max:200', 'unique:users'],
+            'email' => ['nullable','string', 'email', 'max:200'],
             'password' => ['required', 'string', 'min:4', 'confirmed'],
             'address' => ['required', 'string', 'max:300'],
+            'phone' => ['required', 'string', 'max:20','unique:users'],
         ]);
     }
 
@@ -92,6 +94,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'address' => $data['address'],
+            'phone' => $data['phone'],
         ]);
     }
 }

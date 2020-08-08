@@ -45,13 +45,13 @@ class LoginController extends Controller
     }
 
     public function authenticate(Request $request) {
-        $creds = $request->only(['email','password']);
+        $creds = $request->only(['phone','password']);
 
         if(Auth::attempt($creds)) {
             return redirect()->route('perfil');
         }else {
             return redirect()->route('login')
-            ->with('warning', 'E-mail e/ou senha invalidos.');
+            ->with('warning', 'Telefone e/ou senha invalidos.');
         }
     }
 
