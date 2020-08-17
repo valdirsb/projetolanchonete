@@ -84,6 +84,9 @@ Route::prefix('/painel')->group(function(){
     Route::get('/profile','Admin\ProfileController@index')->name('painel-profile');
     Route::PUT('/profilesave','Admin\ProfileController@save')->name('painel-profile.save');
 
+    //Bairros
+    Route::resource('/districts', 'Admin\DistrictController');
+
     //Usuarios
 
         //clientes

@@ -243,6 +243,11 @@ return [
             'label_color' => 'success',
             'submenu' => [
                 [
+                    'text' => 'Fazer Pedido',
+                    'icon_color' => 'yellow',
+                    'url'  => 'painel/orders/new',
+                ],
+                [
                     'text' => 'Novos Pedidos',
                     'icon_color' => 'cyan',
                     'url'  => 'painel/orders',
@@ -279,6 +284,11 @@ return [
             'text'        => 'Clientes',
             'url'         => 'painel/users/clients',
             'icon'        => 'fas fa-fw fa-user-friends',
+        ],
+        [
+            'text'        => 'Bairros',
+            'url'         => 'painel/districts',
+            'icon'        => 'fas fa-map-marked-alt',
         ],
 
         ['header' => 'account_settings'],
