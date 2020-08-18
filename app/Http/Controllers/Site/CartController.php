@@ -87,7 +87,12 @@ class CartController extends Controller {
         $user = Auth::user();
         
         $array =[];
-        $vtotal = $user->endereco->district->frete;
+        if($user){
+            $vtotal = $user->endereco->district->frete;
+        }else{
+            $vtotal = 0;
+        }
+        
 
         foreach($data as $key => $cart){
             $product = Product::find($cart['id']);
@@ -106,7 +111,12 @@ class CartController extends Controller {
         }
 
         $array['vtotal'] = $vtotal;
-        $array['frete'] = $user->endereco->district->frete;
+        if($user){
+            $array['frete'] = $user->endereco->district->frete;
+        }else{
+            $array['frete'] = 0;
+        }
+        
 
         return $array;
     }
