@@ -32,7 +32,7 @@
                         <form method="POST" action="{{ route('districts.destroy', ['district' => $district->id]) }}" class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir?')">
                             @method('DELETE')
                             @csrf
-                            <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Excluir</button>
+                            <button disabled class="btn btn-sm btn-danger disabled"><i class="fas fa-trash"></i> Excluir</button>
                         </form>
                     </td>
                 </tr>

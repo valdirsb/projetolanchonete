@@ -250,6 +250,9 @@
 <script type="text/javascript" src="{{asset('vendor/datatables/js/responsive.bootstrap4.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('vendor/datatables/js/script.js')}}"></script>
 <script type="text/javascript">
+
+
+
     setTimeout(function(){
         location.reload();
     },60000);
