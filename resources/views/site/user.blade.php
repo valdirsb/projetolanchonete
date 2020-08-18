@@ -39,7 +39,7 @@ VOLTAR
   <div>
       <h3>Endereço para entrega:</h3>
       <p class="address">
-        {{$user->address}}
+        {{$user->endereco->logradouro}}, {{$user->endereco->numero}}, {{$user->endereco->district->nome}}, Cep: {{$user->endereco->cep}}
       </p>
   </div>
 </div>

@@ -58,6 +58,12 @@ VOLTAR
 
         <tr>
             <td  colspan="4"  style="text-align: center">
+                <p>Frete: {{'R$ '.number_format($frete, 2, ',', '.')}}</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td  colspan="4"  style="text-align: center">
                 <a href="/" class="botao-cont" >Continuar Comprando</a>
             </td>
         </tr>

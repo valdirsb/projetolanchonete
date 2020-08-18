@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
 {
-    
+    public $timestamps = false;
 
     public function user()
     {
@@ -17,4 +17,5 @@ class Address extends Model
     {
         return $this->belongsTo('App\District');
     }
+
 }

@@ -1,6 +1,6 @@
 @extends('layouts.site')
 
-@section('title', 'Cadastro')
+@section('title', 'Cadastrar Endereço')
 
 @section('cadastro', 'class=active')
 
@@ -17,7 +17,7 @@ VOLTAR
 <header class="cart-header">
     <div  class="div-cart">
         <i class="fas fa-user"></i>
-        <h1>Cadastro</h1>
+        <h1>Cadastro de endereço</h1>
     </div>
 </header>
 @if($errors->any())
@@ -32,44 +32,41 @@ VOLTAR
     @csrf
     <div class="row">
         <div class="col-25">
-          <label for="nome">Digite seu nome:</label>
+          <label for="nome">Bairro:</label>
         </div>
         <div class="col-75">
-            <input type="text" name="name" value="{{old('name')}}" >
+          <select id="district" name="district">
+            @foreach ($districts as $district)
+              <option value={{$district->id}}>{{$district->nome}}</option>
+            @endforeach
+          </select>
         </div>
     </div>
     <div class="row">
       <div class="col-25">
-        <label for="email">Digite seu Telefone:</label>
+        <label for="logradouro">Digite seu enderesço:</label>
       </div>
       <div class="col-75">
-        <input type="text" name="phone"class="phone" id="phone" value="{{old('phone')}}" >
+        <textarea id="subject" name="logradouro" placeholder="Degite seu endereço..." style="height:90px"></textarea>
       </div>
     </div>
     <div class="row">
       <div class="col-25">
-        <label for="email">Digite seu email:</label>(opcional)
+        <label for="numero">Numero:</label>
       </div>
       <div class="col-75">
-        <input type="email" name="email" value="{{old('email')}}" >
+        <input type="text" name="numero" value="{{old('numero')}}" >
       </div>
     </div>
     <div class="row">
-        <div class="col-25">
-          <label for="senha">Digite sua senha:</label>
-        </div>
-        <div class="col-75">
-          <input type="password" name="password" >
-        </div>
+      <div class="col-25">
+        <label for="cep">Digite seu CEP:</label>
+      </div>
+      <div class="col-75">
+        <input type="text" name="cep" value="{{old('cep')}}" >
+      </div>
     </div>
-    <div class="row">
-        <div class="col-25">
-          <label for="senha">Confirme sua senha:</label>
-        </div>
-        <div class="col-75">
-          <input type="password" name="password_confirmation">
-        </div>
-    </div>
+    
     <div class="row">
       <input type="submit" value="Cadastrar">
     </div>

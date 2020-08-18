@@ -49,7 +49,7 @@ class RegisterController extends Controller
     }
 
     public function register(Request $request) {
-        $data = $request->only(['name', 'email', 'password', 'password_confirmation', 'address', 'phone']);
+        $data = $request->only(['name', 'email', 'password', 'password_confirmation', 'phone']);
         $validator = $this->validator($data);
 
         if($validator->fails()) {
@@ -60,7 +60,7 @@ class RegisterController extends Controller
 
         $user = $this->create($data);
         Auth::login($user);
-        return redirect()->route('perfil');
+        return redirect()->route('registerAddress');
 
     }
 
@@ -76,7 +76,6 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:100'],
             'email' => ['nullable','string', 'email', 'max:200'],
             'password' => ['required', 'string', 'min:4', 'confirmed'],
-            'address' => ['required', 'string', 'max:300'],
             'phone' => ['required', 'string', 'max:20','unique:users'],
         ]);
     }
@@ -93,7 +92,6 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'address' => $data['address'],
             'phone' => $data['phone'],
         ]);
     }

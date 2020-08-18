@@ -40,9 +40,9 @@ class User extends Authenticatable
     ];
 
 
-    public function addresses()
+    public function endereco()
     {
-        return $this->hasMany('App\Address');
+        return $this->hasOne('App\Address');
     }
 
     public function orders()

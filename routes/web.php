@@ -52,6 +52,9 @@ Route::prefix('/user')->group(function(){
     Route::get('/register','Auth\RegisterController@index')->name('register');
     Route::post('/register','Auth\RegisterController@register');
 
+    Route::get('/register-address','Site\AddressController@index')->name('registerAddress');
+    Route::post('/register-address','Site\AddressController@register')->name('registerAddress');
+
     Route::get('/logout','Auth\LoginController@logout')->name('logout');
     
 });

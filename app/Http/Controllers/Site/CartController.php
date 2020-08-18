@@ -83,9 +83,11 @@ class CartController extends Controller {
 
 
     protected function cart($data) {
+
+        $user = Auth::user();
         
         $array =[];
-        $vtotal = 0;
+        $vtotal = $user->endereco->district->frete;
 
         foreach($data as $key => $cart){
             $product = Product::find($cart['id']);
@@ -104,6 +106,7 @@ class CartController extends Controller {
         }
 
         $array['vtotal'] = $vtotal;
+        $array['frete'] = $user->endereco->district->frete;
 
         return $array;
     }
@@ -162,7 +165,8 @@ $textoconvertido = rawurlencode ($texto);
     protected function ordersave($user,$cartao,$dinheiro,$troco,$obs,$array){
 
         $user_id = $user->id;
-        $address_id = 1;
+        $address_id = $user->endereco->id;
+        $frete = $user->endereco->district->frete;
 
         if($cartao){
             $cartao = 1;
@@ -184,7 +188,8 @@ $textoconvertido = rawurlencode ($texto);
             }
             $newpedido->obs = $obs;
             $newpedido->troco = floatval($troco);
-            $newpedido->valor = 0;
+            $newpedido->valor = floatval($frete);
+            $newpedido->frete = floatval($frete);
             $newpedido->save();
 
         foreach($array['cartlist'] as $produto){

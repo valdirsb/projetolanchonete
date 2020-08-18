@@ -15,6 +15,7 @@
         <tr>
             <th>ID</th>
             <th>Nome</th>
+            <th>Endereço</th>
             <th>E-mail</th>
             <th>Ações</th>
         </tr>
@@ -24,6 +25,7 @@
                 <tr>
                     <td>{{$user->id}}</td>
                     <td>{{$user->name}}</td>
+                    <td>{{$user->endereco->district->nome}}</td>
                     <td>{{$user->email}}</td>
                     <td>
                         <form method="POST" action="{{ route('clients.destroy', ['client' => $user->id]) }}" class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir?')">
