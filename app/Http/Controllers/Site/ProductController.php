@@ -17,7 +17,7 @@ class ProductController extends Controller
 
     // Filtro por Categoria
     public function filterCategory($id){
-        $products = Product::where('id_categoria', $id)->get();
+        $products = Product::where('id_categoria', $id)->where('disponivel', 1)->get();
         $category = Category::find($id);
 
         return view('site.productlist', ['products'=>$products, 'category'=>$category]);
