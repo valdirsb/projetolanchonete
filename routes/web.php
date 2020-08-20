@@ -105,6 +105,7 @@ Route::prefix('/painel')->group(function(){
         Route::get('/orders/entregues','Admin\OrderController@entregues');
         Route::get('/orders/cancelados','Admin\OrderController@cancelados');
         Route::PUT('/orders/{id}','Admin\OrderController@savestatus')->name('painel-order-status');
+        Route::get('/orders/print/{id}','Admin\OrderController@print')->name('painel-order-print');
 
 });
 

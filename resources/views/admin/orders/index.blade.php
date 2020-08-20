@@ -217,7 +217,7 @@
                     <td>
                         <a href="#" class="btn btn-sm btn-outline-success" data-toggle="modal" data-target="#detailsModal{{$pedido->id}}"><i class="far fa-eye"></i> Visualizar</a>
                         
-                        <a href="#" class="btn btn-sm btn-outline-info"><i class="fas fa-print"></i> Imprimir</a>
+                        <a href="{{ route('painel-order-print', ['id'=>$pedido->id] )}}" class="btn btn-sm btn-outline-info"><i class="fas fa-print"></i> Imprimir</a>
                     </td>
                 </tr>
 
