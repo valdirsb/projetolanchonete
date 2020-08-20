@@ -217,7 +217,8 @@
                     <td>
                         <a href="#" class="btn btn-sm btn-outline-success" data-toggle="modal" data-target="#detailsModal{{$pedido->id}}"><i class="far fa-eye"></i> Visualizar</a>
                         
-                        <a href="{{ route('painel-order-print', ['id'=>$pedido->id] )}}" class="btn btn-sm btn-outline-info"><i class="fas fa-print"></i> Imprimir</a>
+                        <a href="{{ route('painel-order-print', ['id'=>$pedido->id] )}}" target="_blank" class="btn btn-sm btn-outline-info"><i class="fas fa-print"></i> Imprimir</a>
+                        
                     </td>
                 </tr>
 
@@ -250,8 +251,6 @@
 <script type="text/javascript" src="{{asset('vendor/datatables/js/responsive.bootstrap4.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('vendor/datatables/js/script.js')}}"></script>
 <script type="text/javascript">
-
-
 
     setTimeout(function(){
         location.reload();
