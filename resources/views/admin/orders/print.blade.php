@@ -3,6 +3,7 @@
   ======================================
   PEDIDO NÚMERO: {{$pedido->id}}
   Nome: {{$pedido->user->name}}
+  Telefone: {{$pedido->user->phone}}
   ======================================
   =============== PEDIDO ===============
 
@@ -38,6 +39,12 @@
 
 
 
+
+
+
+
+
+--
 </pre>
 
 <script type="text/javascript">
