@@ -13,6 +13,10 @@
   *********
 
 @endforeach
+@if ($pedido->entrega==0)
+  =====================================
+  RETIRAR PEDIDO NO BALCÃO
+@else
   ======== ENDEREÇO DE ENTREGA ========
 
   {{$pedido->address->logradouro}}, {{$pedido->address->numero}}
@@ -20,6 +24,7 @@
 
   ======== VALOR DO FRETE ========
   R$ {{number_format($pedido->frete, 2, ',', '.')}}
+@endif
   =====================================
   Valor Total:
   R$ {{number_format($pedido->valor, 2, ',', '.')}}

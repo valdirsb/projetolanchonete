@@ -37,10 +37,17 @@ VOLTAR
 
 <div class="card">
   <div>
+    @if (isset($user->endereco))
       <h3>Endereço para entrega:</h3>
       <p class="address">
         {{$user->endereco->logradouro}}, {{$user->endereco->numero}}, {{$user->endereco->district->nome}}, Cep: {{$user->endereco->cep}}
       </p>
+    @else 
+      <p class="address">
+        endereço não cadastrado
+      </p>
+      <a href="user/register-address">cadastrar endereço</a>
+    @endif
   </div>
 </div>
 

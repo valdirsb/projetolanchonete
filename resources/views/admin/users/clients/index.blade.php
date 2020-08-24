@@ -15,8 +15,8 @@
         <tr>
             <th>ID</th>
             <th>Nome</th>
-            <th>Endereço</th>
-            <th>E-mail</th>
+            <th>Bairro</th>
+            <th>Telefone</th>
             <th>Ações</th>
         </tr>
         </thead>
@@ -25,8 +25,12 @@
                 <tr>
                     <td>{{$user->id}}</td>
                     <td>{{$user->name}}</td>
-                    <td>{{$user->endereco->district->nome}}</td>
-                    <td>{{$user->email}}</td>
+                    @if (isset($user->endereco->district))
+                        <td>{{$user->endereco->district->nome}}</td>
+                    @else 
+                        <td>Endereço não cadastrado</td>
+                    @endif
+                    <td>{{$user->phone}}</td>
                     <td>
                         <form method="POST" action="{{ route('clients.destroy', ['client' => $user->id]) }}" class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir?')">
                             @method('DELETE')

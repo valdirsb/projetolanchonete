@@ -97,18 +97,25 @@
                                             @endforeach
                                             
                                         </table>
-                                        <div class="row">
-                                            <strong>Valor do Frete:</strong>
-                                        </div>
-                                        <div class="row">
-                                            <p>{{$pedido->frete}} </p>
-                                        </div>
-                                        <div class="row">
-                                            <strong>Endereço de entrega:</strong>
-                                        </div>
-                                        <div class="row">
-                                            <p>{{$pedido->user->endereco->logradouro}}, {{$pedido->user->endereco->numero}}, {{$pedido->user->endereco->district->nome}}, CEP: {{$pedido->user->endereco->cep}} </p>
-                                        </div>
+                                        @if ($pedido->entrega ==0)
+                                            <div class="row">
+                                                <strong>RETIRAR PEDIDO NO BALCÃO</strong>
+                                            </div>
+                                        @else 
+                                            <div class="row">
+                                                <strong>Valor do Frete:</strong>
+                                            </div>
+                                            <div class="row">
+                                                <p>{{$pedido->frete}} </p>
+                                            </div>
+                                            <div class="row">
+                                                <strong>Endereço de entrega:</strong>
+                                            </div>
+                                            <div class="row">
+                                                <p>{{$pedido->user->endereco->logradouro}}, {{$pedido->user->endereco->numero}}, {{$pedido->user->endereco->district->nome}}, CEP: {{$pedido->user->endereco->cep}} </p>
+                                            </div>
+                                        @endif
+                                            
                                         <div class="row">
                                             <h5>Valor Total</h5>
                                         </div>

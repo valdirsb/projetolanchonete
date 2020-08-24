@@ -36,7 +36,7 @@ Route::prefix('/cart')->group(function(){
     Route::get('/','Site\CartController@index')->name('cart');
     Route::post('/','Site\CartController@add');
     Route::get('/del/{chave}','Site\CartController@del');
-    Route::get('/pag','Site\CartController@pag')->middleware('auth');
+    Route::get('/pag','Site\CartController@pag')->middleware('auth')->middleware('checkaddress');
     Route::post('/pag','Site\CartController@pagok')->middleware('auth');
 });
 
@@ -53,7 +53,7 @@ Route::prefix('/user')->group(function(){
     Route::post('/register','Auth\RegisterController@register');
 
     Route::get('/register-address','Site\AddressController@index')->name('registerAddress');
-    Route::post('/register-address','Site\AddressController@register')->name('registerAddress');
+    Route::post('/register-address','Site\AddressController@register');
 
     Route::get('/logout','Auth\LoginController@logout')->name('logout');
     

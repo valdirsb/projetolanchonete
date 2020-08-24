@@ -62,6 +62,7 @@ class CartController extends Controller {
         $dinheiro = $request->input('dinheiro');
         $troco = $request->input('troco');
         $obs = $request->input('obs');
+        $entrega = $request->input('entrega');
 
         $data = $request->session()->get('cart', []);
         $array = $this->cart($data);
@@ -69,7 +70,7 @@ class CartController extends Controller {
         //$retorno = $this->cartenviar($user,$cartao,$dinheiro,$troco,$obs,$array);
         //return view('site.pagok',$retorno );
 
-        $retorno2 = $this->ordersave($user,$cartao,$dinheiro,$troco,$obs,$array);
+        $retorno2 = $this->ordersave($user,$cartao,$dinheiro,$troco,$obs,$entrega,$array);
         
         $request->session()->forget('cart');
         
@@ -86,13 +87,7 @@ class CartController extends Controller {
 
         $user = Auth::user();
         
-        $array =[];
-        if($user){
-            $vtotal = $user->endereco->district->frete;
-        }else{
-            $vtotal = 0;
-        }
-        
+        $vtotal = 0;
 
         foreach($data as $key => $cart){
             $product = Product::find($cart['id']);
@@ -111,8 +106,9 @@ class CartController extends Controller {
         }
 
         $array['vtotal'] = $vtotal;
-        if($user){
+        if($user && isset($user->endereco)){
             $array['frete'] = $user->endereco->district->frete;
+            $array['user'] = $user;
         }else{
             $array['frete'] = 0;
         }
@@ -172,7 +168,7 @@ $textoconvertido = rawurlencode ($texto);
 
     }
 
-    protected function ordersave($user,$cartao,$dinheiro,$troco,$obs,$array){
+    protected function ordersave($user,$cartao,$dinheiro,$troco,$obs,$entrega,$array){
 
         $user_id = $user->id;
         $address_id = $user->endereco->id;
@@ -198,8 +194,14 @@ $textoconvertido = rawurlencode ($texto);
             }
             $newpedido->obs = $obs;
             $newpedido->troco = floatval($troco);
-            $newpedido->valor = floatval($frete);
-            $newpedido->frete = floatval($frete);
+            $newpedido->entrega = $entrega;
+            if($entrega==0){
+                $newpedido->frete = 0;
+                $newpedido->valor = 0;
+            }else{
+                $newpedido->frete = floatval($frete);
+                $newpedido->valor = floatval($frete);
+            }
             $newpedido->save();
 
         foreach($array['cartlist'] as $produto){

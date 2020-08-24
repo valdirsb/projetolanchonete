@@ -10,7 +10,7 @@
 VOLTAR
 @endcomponent
 
-<div class="section-container">
+<div class="section-container container-form">
     <header class="cart-header">
         <div  class="div-cart">
             <i class="fas fa-shopping-cart"></i>
@@ -55,13 +55,6 @@ VOLTAR
         @else
             <tr><td style="text-align: center" class="sem-item">Não há Itens no Carrinho!</td></tr>
         @endif
-
-        <tr>
-            <td  colspan="4"  style="text-align: center">
-                <p>Frete: {{'R$ '.number_format($frete, 2, ',', '.')}}</p>
-            </td>
-        </tr>
-
         <tr>
             <td  colspan="4"  style="text-align: center">
                 <a href="/" class="botao-cont" >Continuar Comprando</a>
@@ -71,9 +64,11 @@ VOLTAR
 
     
 </div>
+
 <div class="flex">
     <div class="flex-1">
-        <p class="cart-val-total">VALOR TOTAL: <span class="valor">{{'R$ '.number_format($vtotal, 2, ',', '.')}}</span></p>
+        <p class="cart-val-total">VALOR TOTAL: <span id="valor2">{{'R$ '.number_format($vtotal, 2, ',', '.')}}</span></p>
+        
     </div>
 </div>
 
@@ -103,3 +98,25 @@ VOLTAR
 
 
 @endsection
+
+<script type="text/javascript">
+
+function troca1(){
+    var numero1 = parseFloat($('#valor').val()) ;
+    var texto = numero1.toLocaleString("pt-BR", { style: "currency" , currency:"BRL"});
+    
+    $('#valor2').text(texto);
+};
+    
+function troca2(){
+    var numero1 = parseFloat($('#valor').val()) ;
+    var numero2 = parseFloat($('#frete').text()) ;
+    var soma = numero1+numero2;
+    
+
+    var texto = soma.toLocaleString("pt-BR", { style: "currency" , currency:"BRL"});
+    
+    $('#valor2').text(texto);
+};
+    
+</script>
