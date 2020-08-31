@@ -10,7 +10,7 @@
 
 <div class="card">
     <div class="card-body">
-      <table id="datatable" class="table">
+      <table class="table datatable">
         <thead>
             <tr>
                 <th>Nº do Pedido</th>
@@ -151,7 +151,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- / Modal Alterar Status -->
+                        <!-- / Modal Detalhes do pedido -->
 
                         <!-- Modal Alterar Status -->
                         <div class="modal fade" id="exampleModal{{$pedido->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

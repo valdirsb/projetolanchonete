@@ -107,6 +107,13 @@ Route::prefix('/painel')->group(function(){
         Route::PUT('/orders/{id}','Admin\OrderController@savestatus')->name('painel-order-status');
         Route::get('/orders/print/{id}','Admin\OrderController@print')->name('painel-order-print');
 
+        //Criar Pedido
+        Route::get('/orders/novo','Admin\OrderController@novo')->name('painel-order-novo');
+        Route::post('/orders/novo','Admin\OrderController@add')->name('painel-order-novo-post');
+        Route::get('/orders/novo/products','Admin\OrderController@productslist')->name('painel-order-novo-products');
+        Route::get('/orders/novo/products/{id}','Admin\OrderController@productslistcat')->name('painel-order-novo-productscat');
+        Route::get('/orders/novo/del/{chave}','Admin\OrderController@del');
+
 });
 
 

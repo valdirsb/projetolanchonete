@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Order;
 use App\Product;
+use App\Category;
 use App\Status;
+use App\User;
 
 class OrderController extends Controller
 {
@@ -29,6 +31,87 @@ class OrderController extends Controller
         ]);
     }
 
+    public function novo(Request $request){
+        $clientes = User::all();
+        $pruducts = Product::all();
+
+        $cliente = $request->session()->get('client', []);
+
+        $data = $request->session()->get('cart-admin', []);
+        $array = $this->cart($data);
+
+        $array['clients'] = $clientes;
+        $array['client'] = $cliente;
+        $array['products'] = $pruducts;
+
+        return view('admin.orders.new', $array);
+    }
+    public function add(Request $request) {
+        //$request->session()->flush();
+
+
+        $client_id = $request->input('client_id');
+        $client_on = $request->input('client_on');
+        $product_id = $request->input('product_id');
+        $cart_on = $request->input('cart_on');
+        $qt = $request->input('qt');
+        $obs = $request->input('obs');
+
+        if($client_on){
+            $cliente = User::find($client_id);
+            $request->session()->put('client', $cliente );
+        }
+
+        if($cart_on){
+            $array = [
+                'id' => $product_id,
+                'qt' => $qt,
+                'obs' => $obs
+            ];
+            $request->session()->push('cart-admin', $array );
+        }
+
+
+        return redirect()->route('painel-order-novo');
+    }
+
+    public function del(Request $request, $chave) {
+        //$request->session()->flush();
+
+        $carts = $request->session()->get('cart-admin');
+        unset($carts[$chave]);
+        $request->session()->forget('cart-admin');
+        $request->session()->put('cart-admin', $carts);
+        return redirect()->back();
+
+    }
+
+    public function productslist(Request $request) {
+        //$request->session()->flush();
+
+        $products = Product::all();
+        $categories = Category::all();
+
+        return view('admin.orders.products', [
+            'products'=> $products,
+            'categories' => $categories
+        ]);
+    }
+
+    public function productslistcat($id) {
+        //$request->session()->flush();
+
+        $products = Product::where('id_categoria', $id)->where('disponivel', 1)->get();
+        $category = Category::find($id);
+        $categories = Category::all();
+
+        return view('admin.orders.products', [
+            'products'=> $products,
+            'categories' => $categories,
+        ]);
+    }
+
+
     public function entregues(){
 
         $pedidos = Order::where('status_id', 4)->get();
@@ -40,6 +123,8 @@ class OrderController extends Controller
             'statuses' => $statuses
         ]);
     }
+
+    
 
     public function cancelados(){
 
@@ -75,6 +160,32 @@ class OrderController extends Controller
         return view('admin.orders.print', [
             'pedido' => $pedido
         ]);
+    }
+
+
+    protected function cart($data) {
+        
+        $vtotal = 0;
+
+        foreach($data as $key => $cart){
+            $product = Product::find($cart['id']);
+
+            $vitem = $cart['qt']*$product->valor;
+            $vtotal += $vitem;
+
+            $array['cartlist'][$key] = [
+                'id' => $product->id,
+                'produto' => $product->produto,
+                'valor' => $product->valor,
+                'qt' => $cart['qt'],
+                'obs' => $cart['obs'],
+
+            ];
+        }
+
+        $array['vtotal'] = $vtotal;
+
+        return $array;
     }
 
 
