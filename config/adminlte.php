@@ -245,7 +245,7 @@ return [
                 [
                     'text' => 'Fazer Pedido',
                     'icon_color' => 'yellow',
-                    'url'  => '#',
+                    'url'  => 'painel/orders/novo',
                 ],
                 [
                     'text' => 'Novos Pedidos',
