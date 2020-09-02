@@ -110,9 +110,11 @@ Route::prefix('/painel')->group(function(){
         //Criar Pedido
         Route::get('/orders/novo','Admin\OrderController@novo')->name('painel-order-novo');
         Route::post('/orders/novo','Admin\OrderController@add')->name('painel-order-novo-post');
+        Route::post('/orders/novo/client','Admin\OrderController@newclient')->name('painel-order-novo-client');
         Route::get('/orders/novo/products','Admin\OrderController@productslist')->name('painel-order-novo-products');
         Route::get('/orders/novo/products/{id}','Admin\OrderController@productslistcat')->name('painel-order-novo-productscat');
         Route::get('/orders/novo/del/{chave}','Admin\OrderController@del');
+        Route::post('/orders/novo/add','Admin\OrderController@pagok')->name('painel-order-novo-add');
 
 });
 

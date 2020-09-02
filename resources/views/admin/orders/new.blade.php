@@ -7,15 +7,25 @@
 @endsection
 
 @section('content')
-<form action="" method="POST" class="form-horizontal" enctype="multipart/form-data">
+<form action="{{ route('painel-order-novo-add') }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
 @csrf
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            <h5><i class="icon fas fa-ban"></i> Ocorreu um erro</h5>
+            @foreach ($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="card">
     <div class="card-body">
         
            <h3>Cliente:</h3>
             <div class="form-group row">
                 <button type="button" class="btn btn-info m-1"  data-toggle="modal" data-target="#findClient"><i class="fa fa-search"></i> Procurar Cliente</button>
-                <button type="button" class="btn btn-info m-1"><i class="fas fa-plus"></i> Novo Cadastro</button>
+                <button type="button" class="btn btn-info m-1"  data-toggle="modal" data-target="#addClient"><i class="fas fa-plus"></i> Novo Cadastro</button>
             </div>
 
             <div class="form-group row">
@@ -24,6 +34,7 @@
                     @if ($client)
                         <p>{{$client->name}}</p>
                         <input type="hidden" name="user_id" value="{{$client->id}}">
+                        <input type="hidden" name="usuario" value=1>
                     @endif
                     
                 </div>
@@ -31,11 +42,11 @@
 
             <div class="form-group">
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="entrega" value="0" checked="">
+                  <input class="form-check-input" type="radio"  onclick=troca1() name="entrega" value="0" checked="">
                   <label class="form-check-label">retirar no Balcão</label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="entrega" value="1" {{isset($client->endereco)?"": "disabled"}}>
+                  <input class="form-check-input" type="radio" onclick=troca2() name="entrega" value="1" {{isset($client->endereco)?"": "disabled"}}>
                   <label class="form-check-label">Entregar no Endereço:</label>
                 </div>
                 <p class="bg-gradient-secondary p-1">
@@ -52,7 +63,7 @@
 
                 @if (isset($client->endereco))
                         <p class="text-danger">Frete: R$ {{$client->endereco->district->frete}}</p>
-                        <input type="hidden" name="frete" value="{{$client->endereco->district->frete}}">
+                        <input type="hidden" id="frete" name="frete" value="{{$client->endereco->district->frete}}">
                 @endif
                 
             </div>
@@ -84,7 +95,7 @@
             <tbody>
                 @if(isset($cartlist))
                     @foreach ($cartlist as $kay=>$item)
-
+                    <input type="hidden" name="itens_do_pedido" value=1>
                     @php
                         $vitem = $item['qt']*$item['valor'];
                     @endphp
@@ -129,8 +140,9 @@
         </div>
     </div>
 </div>
-<div class="text-center"><h2>Valor Total: {{'R$ '.number_format($vtotal, 2, ',', '.')}}</h2></div>
+<div class="text-center"><h2>Valor Total: <span id="valor2">{{'R$ '.number_format($vtotal, 2, ',', '.')}}</span></h2></div>
 
+<input type="hidden" id="valor" name="valor" value="{{$vtotal}}">
 <div class="card">
     <div class="card-body">
         <div class="form-group">
@@ -142,7 +154,7 @@
 
 <div class="card">
     <div class="card-body text-center">
-        <button type="button" class="btn btn-success m-1"><i class="fas fa-plus"></i> Finalizar</button>
+        <input type="submit" class="btn btn-success m-1" value="FINALIZAR">
     </div>
 </div>
 
@@ -168,6 +180,21 @@
                     </tr>
                     </thead>
                     <tbody>
+                        <tr style="display: none">
+                            <td>nome</td>
+                            <td>
+                                <form method="POST" action="{{ route('painel-order-novo-post')}}" class="d-inline btn-block">
+                                    @csrf
+                                    <input type="hidden" name="client_id" value="0">
+                                    <input type="hidden" name="client_on" value=1>
+                                    <button class="btn btn-sm btn-secondary btn-block">
+                                       teste form
+                                    </button>
+                                </form>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
                         @foreach ($clients as $client)
                         <tr>
                             <td>{{$client->id}}</td>
@@ -196,55 +223,79 @@
 </div>
 <!-- / Modal Procurar Clientes -->
 
-<!-- Modal Procurar Itens do pedido -->
-<div class="modal fade" id="findItens" tabindex="-1" role="dialog" aria-labelledby="findItensLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
+<!-- Modal Cadastrar Cliente -->
+<div class="modal fade" id="addClient" tabindex="-1" role="dialog" aria-labelledby="addClientLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="findItensLabel">Adicionar itens </h5>
+                <h5 class="modal-title" id="addClientLabel">Cadastrar Novo Cliente </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <iframe src="{{ route('painel-order-novo-products') }}" name="main" id="main" frameborder="0" width="99%" height="1000" align="left" >Your browser isn't compatible</iframe>
-                {{--
-                <table  id="datatable" class="table table-hover datatable">
-                    <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>Nome</th>
-                        <th>descrição</th>
-                        <th>Valor</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($products as $product)
-                        <tr>
-                            <td>{{$product->id}}</td>
-                            <td>
-                                <form method="POST"action="{{ route('painel-order-novo-post')}}" class="d-inline btn-block">
-                                    @csrf
-                                    <input type="hidden" name="client_id" value="{{$product->id}}">
-                                    <button class="btn btn-sm btn-secondary btn-block">
-                                        {{$product->produto}}
-                                    </button>
-                                </form>
-                            </td>
-                            <td>{{$product->descricao}}</td>
-                            <td>{{$product->valor}}</td>
-                        </tr>   
-                        @endforeach
-                        
-                        
-                    </tbody>
-                  </table>
-                --}}
+                <div class="card">
+                    <div class="card-body">
+                        <form action="{{ route('painel-order-novo-client')}}" method="POST" class="form-horizontal">
+                            @csrf
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Nome</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="name" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror" >
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">E-mail</label>
+                                <div class="col-sm-9">
+                                    <input type="email" name="email" value="{{old('email')}}" class="form-control @error('email') is-invalid @enderror">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Telefone</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="phone" inputmode="numeric" id="phone"  class="form-control @error('phone') is-invalid @enderror">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Bairro</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="district">
+                                        @foreach ($districts as $district)
+                                            <option value="{{$district->id}}">{{$district->nome}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Endereço</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="logradouro" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Numero</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="numero" class="form-control">
+                                </div>
+                                <label class="col-sm-2 col-form-label">CEP</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="cep" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"></label>
+                                <div class="col-sm-9">
+                                    <input type="submit" value="Cadastrar" class="btn btn-success">
+                                </div>
+                            </div>   
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<!-- / Modal Procurar Itens do pedido -->
+<!-- / Modal Cadastrar Cliente -->
 
 </form>
 @endsection
@@ -270,7 +321,44 @@
 <script type="text/javascript" src="{{asset('vendor/datatables/js/responsive.bootstrap4.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('vendor/datatables/js/script.js')}}"></script>
 
+<script>
 
+    function troca1(){
+        var numero1 = parseFloat($('#valor').val()) ;
+        var texto = numero1.toLocaleString("pt-BR", { style: "currency" , currency:"BRL"});
+        
+        $('#valor2').text(texto);
+    };
+        
+    function troca2(){
+        var numero1 = parseFloat($('#valor').val()) ;
+        var numero2 = parseFloat($('#frete').val()) ;
+        var soma = numero1+numero2;
+        
+    
+        var texto = soma.toLocaleString("pt-BR", { style: "currency" , currency:"BRL"});
+        
+        $('#valor2').text(texto);
+    };
+
+    $(function(){
+
+    var SPMaskBehavior = function (val) {
+        return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+      },
+    spOptions = {
+        onKeyPress: function(val, e, field, options) {
+            field.mask(SPMaskBehavior.apply({}, arguments), options);
+          }
+    };
+      
+    $('#phone').mask(SPMaskBehavior, spOptions);
+
+    });
+        
+    </script>
+
+<script type="text/javascript" src="{{asset('assets/js/jquery.mask.min.js')}}"></script>
 <!-- / JS DataTables -->
     
 @stop

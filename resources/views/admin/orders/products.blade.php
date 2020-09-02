@@ -8,6 +8,12 @@
 
 @section('content')
 
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item" aria-current="page"><a href="{{ route('painel-order-novo') }}">Pedido</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Itens do Pedido</li>
+    </ol>
+</nav>
 
 <div class="card">
     
@@ -17,8 +23,8 @@
     <div class="card-body">
         <div class="row">
             <a class="btn btn-warning m-1" href="{{ route('painel-order-novo-products') }}">Todos</a> 
-            @foreach ($categories as $category)
-                <a class="btn btn-warning m-1" href="{{ route('painel-order-novo-productscat', ['id' => $category->id]) }}">{{$category->categoria}}</a> 
+            @foreach ($categories as $categoryItem)
+                <a class="btn btn-warning m-1" href="{{ route('painel-order-novo-productscat', ['id' => $categoryItem->id]) }}">{{$categoryItem->categoria}}</a> 
             @endforeach
         </div>
     </div>
@@ -28,7 +34,12 @@
 <div class="card">
     
     <div class="card-header">
-        <h4>Todas</h4>
+        
+        @if (isset($category))
+            <h4>{{$category->categoria}}</h4>
+        @else 
+            <h4>Todas</h4>
+        @endif
     </div>
     <div class="card-body">
        <table  id="datatable" class="table table-hover datatable">

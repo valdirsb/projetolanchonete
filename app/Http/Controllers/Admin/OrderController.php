@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 use App\Order;
 use App\Product;
 use App\Category;
 use App\Status;
 use App\User;
+use App\District;
+use App\Address;
 
 class OrderController extends Controller
 {
@@ -34,6 +38,7 @@ class OrderController extends Controller
     public function novo(Request $request){
         $clientes = User::all();
         $pruducts = Product::all();
+        $districts = District::all();
 
         $cliente = $request->session()->get('client', []);
 
@@ -43,9 +48,61 @@ class OrderController extends Controller
         $array['clients'] = $clientes;
         $array['client'] = $cliente;
         $array['products'] = $pruducts;
+        $array['districts'] = $districts;
 
         return view('admin.orders.new', $array);
     }
+
+    public function newclient(Request $request){
+
+        $data = $request->only([
+            'name',
+            'email',
+            'phone',
+            'district',
+            'logradouro',
+            'numero',
+            'cep'
+        ]);
+
+        $validator = Validator::make($data, [
+            'name' => ['required', 'string', 'max:100'],
+            'email' => ['nullable','string', 'email', 'max:200'],
+            'phone' => ['required', 'string', 'max:20','unique:users'],
+            'district' => ['required', 'max:20'],
+            'logradouro' => ['required','string', 'max:200'],
+            'numero' => ['required', 'string'],
+            'cep' => ['nullable', 'string'],
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->route('painel-order-novo')
+            ->withErrors($validator)
+            ->withInput();
+        }
+
+        $user = new User();
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->phone = $data['phone'];
+        $user->password = Hash::make($data['phone']);
+        $user->save();
+
+        $newaddress = new Address();
+            $newaddress->user_id = $user->id;
+            $newaddress->district_id = $data['district'];
+            $newaddress->logradouro = $data['logradouro'];
+            $newaddress->numero = $data['numero'];
+            $newaddress->cep = $data['cep'];
+            $newaddress->save();
+
+        $request->session()->put('client', $user );
+
+        return redirect()->route('painel-order-novo');
+
+
+    }
+
     public function add(Request $request) {
         //$request->session()->flush();
 
@@ -89,7 +146,7 @@ class OrderController extends Controller
     public function productslist(Request $request) {
         //$request->session()->flush();
 
-        $products = Product::all();
+        $products = Product::where('disponivel', 1)->get();
         $categories = Category::all();
 
         return view('admin.orders.products', [
@@ -108,7 +165,55 @@ class OrderController extends Controller
         return view('admin.orders.products', [
             'products'=> $products,
             'categories' => $categories,
+            'category' => $category
         ]);
+    }
+
+    public function pagok(Request $request) {
+
+        $cartao = $request->input('cartao');
+        $dinheiro = $request->input('dinheiro');
+        $troco = $request->input('troco');
+        $obs = $request->input('obs');
+        $entrega = $request->input('entrega');
+        $user_id = $request->input('user_id');
+
+        $user = User::find($user_id);
+
+        //inicio do Validator
+        $datauser = $request->only([
+            'usuario',
+            'itens_do_pedido'
+        ]);
+
+        $validator = Validator::make($datauser, [
+            'usuario' => ['required'],
+            'itens_do_pedido' => ['required'],
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->route('painel-order-novo')
+            ->withErrors($validator)
+            ->withInput();
+        }
+
+
+        //fim do validator
+        
+
+        $data = $request->session()->get('cart-admin', []);
+        if($data){
+            $array = $this->cart($data);
+
+            $retorno2 = $this->ordersave($user,$cartao,$dinheiro,$troco,$obs,$entrega,$array);
+            
+            $request->session()->forget(['cart-admin', 'client']);
+        } else{
+            alert('nenhum item selecionado');
+        }
+
+        return redirect()->route('painel-order');
+
     }
 
 
@@ -278,4 +383,63 @@ class OrderController extends Controller
         
     
     }
+
+    protected function ordersave($user,$cartao,$dinheiro,$troco,$obs,$entrega,$array){
+
+        $user_id = $user->id;
+        $address_id = $user->endereco->id;
+        $frete = $user->endereco->district->frete;
+
+        if($cartao){
+            $cartao = 1;
+        }
+
+        if($dinheiro){
+            $dinheiro = 1;
+        }
+
+
+        $newpedido = new Order();
+            $newpedido->user_id = $user_id;
+            $newpedido->address_id = $address_id;
+            if($cartao){
+                $newpedido->cartao = 1;
+            }
+            if($dinheiro){
+                $newpedido->dinheiro = 1;
+            }
+            $newpedido->obs = $obs;
+            $newpedido->troco = floatval($troco);
+            $newpedido->entrega = $entrega;
+            if($entrega==0){
+                $newpedido->frete = 0;
+                $newpedido->valor = 0;
+            }else{
+                $newpedido->frete = floatval($frete);
+                $newpedido->valor = floatval($frete);
+            }
+            $newpedido->save();
+
+        foreach($array['cartlist'] as $produto){
+            $product = Product::find($produto['id']);
+
+            $vtotal = $produto['qt']*$product->valor;
+
+            $newpedido->products()->save($product, [
+            'quantidade' => $produto['qt'],
+            'valor_unitario' => $product->valor,
+            'valor_total' => $vtotal,
+            'obs' => $produto['obs']
+            ]);
+
+            $newpedido->valor += $vtotal;
+        }
+
+        $newpedido->save();
+
+        return $newpedido;
+
+    }
+
+
 }
